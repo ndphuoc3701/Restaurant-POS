@@ -45,7 +45,6 @@ def print_order(request, id):
 
 
 def place_list(request):
-    rec = Pos.place_manage()
     rec = Staff.request_place()
     context = {"place": rec}
     return render(request, "product/place_list.html", context)
@@ -93,7 +92,8 @@ def check_order(request, id):
     import json
     a = json.loads(request.body)
     global cus, place
-    return JsonResponse(True, safe=False) if Staff.request_order(cus, place, 'note', a) == True else JsonResponse(Staff.request_order(cus, place, 'note', a), safe=False)
+    x=Staff.request_order(cus, place, 'note', a)
+    return JsonResponse(True, safe=False) if x == True else JsonResponse(x, safe=False)
 
 
 def confirm_reserve(request):
