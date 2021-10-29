@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+Chỗ ngồi đặt trước
+<p>Id_Place &emsp; Name&emsp; Phone</p>
+{% for item in reservation %}
+<p>{{ item.id }}&emsp; {{ item.reserve.name }}&emsp; {{ item.reserve.phone }}<button
+        onclick="reserve('{{item.reserve.id}}')">Đặt chỗ</button>
+</p>
+<script>
+    var csrftoken = getCookie('csrftoken');
+    function reserve(id) {
+
+        var url = '/product/place/confirm/';
+        console.log('cc');
+        console.log(csrftoken);
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': csrftoken,
+            },
+            body: JSON.stringify({ id_cus: id, id_place: "{{item.id}}" })
+        }).then(res => {
+            // document.getElementById("d").innerHTML = res;
+            return res.json();
+        }
+        ).then((data) => {
+            window.location.href = "{% url 'product:create-order' id_order %}";
+
+        });
+
+    }</script>
+{% endfor %}
+<a href="../">Quay lại</a>
+{% endblock content %}

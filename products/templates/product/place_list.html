@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<a href="./reservation">Chỗ ngồi đặt trước</a>
+<p>Id &emsp; Status</p>
+{% for item in place %}
+<p>{{ item.id }}&emsp; {{ item.status }}
+    {% if item.status == 0 %}<a href="./{{ item.id }}">Đặt chỗ</a>
+    {% elif item.status == 2 %}
+    {% endif %}
+</p>
+{% endfor %}
+<a href="../home">Quay lại</a>
+{% endblock content %}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<label for="phone">Phone</label>
+<input type="number" id="phone" name="phone"><br>
+<button onclick="pay()">x</button>
+<p id="d">d</p>
+<button onclick="pay_confirm()">Pay</button>
+<script>
+    var csrftoken = getCookie('csrftoken');
+    function pay() {
+
+        var url = '/product/pay/fetch/';
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': csrftoken,
+            },
+            body: JSON.stringify({ phone: document.getElementById('phone').value })
+        }).then(res => {
+            // document.getElementById("d").innerHTML = res;
+            return res.json();
+        }
+        ).then((data) => {
+            document.getElementById("d").innerHTML = data;
+        });
+
+    }
+    function pay_confirm() {
+
+        var url = '/product/pay/confirm/';
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': csrftoken,
+            },
+            body: JSON.stringify({ phone: document.getElementById('phone').value })
+        }).then(res => {
+            // document.getElementById("d").innerHTML = res;
+            return res.json();
+        }
+        ).then(() => {
+            window.location.href = "{% url 'product:place-list' %}";
+        });
+
+    }</script>
+{% endblock content %}
