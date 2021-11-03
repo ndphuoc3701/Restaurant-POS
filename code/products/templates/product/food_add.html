@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div style="display: flex">
+    <div style="display:flex;flex-grow: 8">
+        {% for item in food_list %}
+        <!-- <img src="#{{item.image.url}}"> -->
+        <button onclick="add('{{item.id}}')" style="flex-grow:1;">
+            {{ item.name }}&emsp;
+        </button>
+        {% endfor %}
+
+    </div>
+    <div id="cart" style="flex-grow: 2;">
+        <div style="width:100%;text-align:center;">Cart</div>
+        <button onclick="order('{{id_order}}')" style="width:100%;text-align:center;">order</button>
+    </div>
+</div>
+</div>
+<p id='d'>dd</p>
+<button onclick="s()">l</button>
+<a href="../">Quay lại</a>
+<script>
+
+
+    var orders = [];
+
+    function add(a) {
+        document.getElementById("d").innerHTML = orders;
+        console.log(orders)
+        orders.push({ id: a, num: 1 });
+        var idx = orders.length - 1;
+        var food = document.createElement("div");
+        document.getElementById("cart").appendChild(food);
+        // food.id = a;
+        var node = document.createElement("div");
+        node.innerHTML = a;
+        node.style.textAlign = 'center';
+
+        food.appendChild(node);
+        var add_sub = document.createElement("div");
+        add_sub.style.display = "flex";
+        food.appendChild(add_sub);
+        var num = document.createElement("div");
+        num.style.flexGrow = 3;
+        num.id = a;
+        num.innerHTML = 1;
+        var sub = document.createElement("button");
+        sub.innerHTML = '-';
+        sub.style.flexGrow = 1;
+        sub.addEventListener("click", function () {
+            orders[idx].num -= 1;
+            num.innerHTML = orders[idx].num;
+        });
+        add_sub.appendChild(sub);
+        add_sub.appendChild(num);
+        var add = document.createElement("button");
+        add.innerHTML = '+'
+        add.style.flexGrow = 1;
+        add.addEventListener("click", function () {
+            orders[idx].num += 101;
+            num.innerHTML = orders[idx].num;
+        });
+        add_sub.appendChild(add);
+    }
+
+    var csrftoken = getCookie('csrftoken');
+    function order(id) {
+        var url = '/product/order/' + id + '/confirm/';
+        console.log('cc');
+        console.log(csrftoken);
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': csrftoken,
+            },
+            body: JSON.stringify(orders)
+        }).then(res => {
+
+
+            return res.json();
+        }
+        ).then((data) => {
+            console.log(data)
+            if (data) {
+                window.location.href = "{% url 'product:place-list' %}";
+            }
+        });
+    }
+</script>
+{% endblock content %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<p>Id &emsp; Id_Cus&emsp; Id_Place &emsp;StartTime&emsp;EndTime
+    &emsp;Note&emsp;TotalPay
+</p>
+
+<p>{{ order.id }}&emsp; {{ order.id_cus.id }}&emsp; {{ order.id_place.id }}&emsp; {{ order.starttime }}
+    &emsp; {{ order.endtime }}&emsp; {{ order.note }}&emsp; {{ order.totalprice }}
+</p>
+<p>Name &emsp; Size&emsp; Quantity &emsp;Unit Price&emsp;Total Price
+    &emsp;Note&emsp;TotalPay
+</p>
+{% for item in items %}
+<p>{{ item.id_food.name }}&emsp; {{ item.size}}&emsp; {{ item.quantity }}&emsp;
+    {{ item.id_food.price }}&emsp; {{ item.get_price }}
+</p>
+{% endfor %}
+<a href="./{{ item.id }}">print</a>
+
+<a href="../../product/home/">Quay lại</a>
+{% endblock content %}

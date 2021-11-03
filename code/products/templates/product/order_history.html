@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- <form method="POST">{% csrf_token %}
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" required><br>
+    <label for="phone">Phone</label>
+    <input type="number" id="phone" name="phone"><br>
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email"><br>
+    <input type="submit" value="Xác nhận">
+</form> -->
+<p>Id &emsp; Id_Cus&emsp; Id_Place &emsp;StartTime&emsp;EndTime
+    &emsp;Note&emsp;Status&emsp;TotalPay
+</p>
+{% for item in order_history %}
+<p>{{ item.id }}&emsp; {{ item.id_cus.id }}&emsp; {{ item.id_place.id }}&emsp; {{ item.starttime }}
+    &emsp; {{ item.endtime }}&emsp; {{ item.note }}&emsp; {{ item.status }}&emsp; {{ item.totalprice }}
+    <a href="./{{ item.id }}">print</a>
+</p>
+{% endfor %} <a href="../home/">Quay lại</a>
+{% endblock content %}

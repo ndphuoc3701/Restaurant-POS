@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<p>Id &emsp; Name&emsp; Phone&emsp; &emsp;Email&emsp;&emsp; Level&emsp; Total Order&emsp; Totol Pay</p>
+
+
+
+<p>{{ item.id }}&emsp; {{ item.name }}&emsp; {{ item.phone }}&emsp; {{ item.email }}&emsp;
+    &emsp;{{ item.level }} &emsp;{{ item.order }} &emsp;{{ item.totalorder }}&emsp;{{ item.totalpay }}
+</p>
+<a href="../">Quay lại</a>
+{% endblock content %}

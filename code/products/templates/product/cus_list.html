@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<p>Id &emsp; Name&emsp; Phone&emsp; &emsp;Email&emsp;&emsp;</p>
+{% for item in cus_list %}
+<p>{{ item.id }}&emsp; {{ item.name }}&emsp; {{ item.phone }}&emsp; {{ item.email }}&emsp;
+    <a href="./{{ item.id }}">Xem</a>
+</p>
+{% endfor %}
+<a href="../home">Quay lại</a>
+{% endblock content %}
