@@ -1,0 +1,30 @@
+{% extends 't/main.html' %}
+{% load static %}
+{% block content %}
+<div class="main-content" id="100" style="display: block">
+    <section class="homeSection" id="home">
+
+        <div class="content grid ">
+            <div class="homeText">
+                <span>WELCOME TO OUR</span>
+                <h1 class="introText">Healthy food collection</h1>
+                <p class="homeParagraph">
+
+                </p>
+
+                <div class="btn">
+                    <a href="/product/place">Order Now</a>
+                </div>
+            </div>
+
+            <div class="homeImg">
+                <img src="{% static 'Images/7.png' %}" alt="Home Food Image" class="home_Image">
+            </div>
+
+        </div>
+
+        <div class="circle"></div>
+
+    </section>
+</div>
+{% endblock content %}

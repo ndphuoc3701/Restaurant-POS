@@ -1,0 +1,39 @@
+{% extends 't/main.html' %}
+{% load static %}
+{% block content %}
+<div class="main-content" style="display: block" id="107">
+    <div id="form-main">
+
+        <div id="form-div">
+            <div class="form" id="form1">
+                <div class="fb-heading">How do you feel about our service?</div>
+                <div class="demo">
+
+                    <span class="rating" data-evaluation="0" id='sta'>
+                        <a href="#" data-value="1" class="material-icons icon">star</a>
+                        <a href="#" data-value="2" class="material-icons icon">star</a>
+                        <a href="#" data-value="3" class="material-icons icon">star</a>
+                        <a href="#" data-value="4" class="material-icons icon">star</a>
+                        <a href="#" data-value="5" class="material-icons icon">star</a>
+                    </span>
+
+
+                </div>
+
+                <p class="text">
+
+                    <textarea name="text" class="validate[required,length[6,300]] feedback-input" id="comment"
+                        placeholder="Comment"></textarea>
+
+                </p>
+
+
+
+                <center><button class="check" onclick="successfeedback()">Submit
+                    </button></center>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/script.js' %}"></script>
+{% endblock content %}

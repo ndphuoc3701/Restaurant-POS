@@ -1,0 +1,22 @@
+{% extends 't/main.html' %}
+{% load static %}
+{% block content %}
+<div class="main-content" style="display: block" id="102">
+    <section class="banner" id="reserve">
+
+        <div class="card-content">
+            <h3>Reservation</h3>
+            <form method="POST">{% csrf_token %}
+                <div class="form-row">
+                    <input type="text" name="name" required placeholder="Full Name">
+                    <input type="number" name="phone" required placeholder="Phone Number">
+                    <input type="email" name="email" placeholder="Email">
+                </div>
+                <div class="form-row">
+                    <input type="submit" value="Order">
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+{% endblock content %}

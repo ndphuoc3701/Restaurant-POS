@@ -1,0 +1,48 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="{% static 'images/Ico.ico' %}">
+    <title>POS Restaurants</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+    <!-- partial:index.partial.html -->
+    <div class="login-page">
+        <div class="form">
+            <div class="login-form" >
+                <input type="text" autocomplete="off" id='user' placeholder="username" />
+                <input type="password" autocomplete="off" id='password' placeholder="password" />
+                <button onclick="log()">Login</button>
+            </div>
+        </div>
+    </div>
+    <!-- partial -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src="{% static 'js/jss.js' %}"></script>
+    <script>
+        function log() {
+            var csrftoken = getCookie('csrftoken');
+            var url = '/product/login/fetch/';
+            console.log('lol');
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': csrftoken,
+                },
+                body: JSON.stringify({ user: document.getElementById('user').value, password: document.getElementById('password').value })
+            }).then(res => {
+                return res.json();
+            }
+            ).then((data) => {
+                if (data == false) alert('Wrong password!!!');
+                else location.assign("{% url 'product:home' %}");
+            })
+        }
+    </script>
+</body>
+
+</html>

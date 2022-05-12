@@ -1,0 +1,70 @@
+{% extends 't/main.html' %}
+{% load static %}
+{% block content %}
+<div class="main-content" style="display: block" id="102">
+    <div id="20001" style="display: block;">
+        <div style="display: flex; flex-direction: row;">
+            <div class="ngang">
+                <table class="content-table">
+                    <h3>
+                        <center>List Reservation</center>
+                    </h3>
+                    <thead>
+                        <tr>
+                            <th>
+                                <center>Place</center>
+                            </th>
+                            <th>
+                                <center>Name</center>
+                            </th>
+                            <th>
+                                <center>Phone</center>
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in reservation %}
+                        <tr id="2101">
+                            <td>
+                                <center>{{ item.id }}</center>
+                            </td>
+                            <td>
+                                <center>{{ item.reserve.name }}</center>
+                            </td>
+                            <td>
+                                <center>{{ item.reserve.phone }}</center>
+                            </td>
+                            <td><button class="check" onclick="reserve('{{item.id}}','{{ item.reserve.phone }}')">Take
+                                </button></td>
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+                <center><a class="check" style="text-decoration: none" href="../">Back</a></center>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var csrftoken = getCookie('csrftoken');
+    function reserve(id, phone) {
+        var url = '/product/place/confirm/';
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': csrftoken,
+            },
+            body: JSON.stringify({ id_cus: phone, id_place: id })
+        }).then(res => {
+            return res.json();
+        }
+        ).then((data) => {
+            window.location.href = "{% url 'product:create-order' id_order %}";
+
+        });
+    }
+</script>
+{% endblock content %}

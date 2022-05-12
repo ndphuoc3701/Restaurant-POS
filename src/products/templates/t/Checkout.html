@@ -1,0 +1,167 @@
+{% extends 't/main.html' %}
+{% load static %}
+{% block content %}
+<div class="main-content" style="display: block" id="104">
+  <div class="container" id="40000">
+    <div class="py-5 text-center">
+      <h2>Checkout form</h2>
+      <center>
+        <div class="wrap" style="width: 35.5%; padding: 0;">
+          <div class="search">
+            <input type="number" id="phone" class="searchTerm" placeholder="Phone Number">
+            <button type="submit" class="searchButton" onclick="pay()">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+        </div>
+      </center>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 order-md-2 mb-4" id="ordercheckout" style="display: none;">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-muted">Order</span>
+        </h4>
+        <ul class="list-group mb-3" id='list'>
+        </ul>
+      </div>
+      <div class="col-md-8 order-md-1" style="display: none" id="info">
+        <h4 class="mb-3">Customer</h4>
+        <form class="needs-validation" novalidate="">
+          <div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label>Name: </label>
+                <span id='name'></span>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label>Phone:</label>
+              <span id='phonee'></span>
+            </div>
+          </div>
+          <hr class="mb-4">
+          <hr class="mb-4">
+
+          <h4 class="mb-3">Payment</h4>
+
+          <div class="d-block my-3">
+            <div class="custom-control custom-radio">
+              <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked="" required=""
+                onclick="creditpay()">
+              <label class="custom-control-label" for="credit">Credit card</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required=""
+                onclick="momopay()">
+              <label class="custom-control-label" for="debit">QR MOMO</label>
+            </div>
+            <div class="custom-control custom-radio">
+              <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required=""
+                onclick="cash()">
+              <label class="custom-control-label" for="paypal">Cash</label>
+            </div>
+          </div>
+          <div id="creditcard">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="cc-name">Name on card</label>
+                <input type="text" class="form-control" id="cc-name" placeholder="" required>
+                <small class="text-muted">Full name as displayed on card</small>
+                <div class="invalid-feedback">
+                  Name on card is required
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="cc-number">Credit card number</label>
+                <input type="text" class="form-control" id="cc-number" placeholder="" required>
+                <div class="invalid-feedback">
+                  Credit card number is required
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3 mb-3">
+                <label for="cc-expiration">Expiration</label>
+                <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
+                <div class="invalid-feedback">
+                  Expiration date required
+                </div>
+              </div>
+              <div class="col-md-3 mb-3">
+                <label for="cc-cvv">CVV</label>
+                <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
+                <div class="invalid-feedback">
+                  Security code required
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="ethpayment" id="momo" style="display: none;">
+
+            <img src="{% static 'Images/QR MOMO.jpg' %}">
+            <img src="{% static 'Images/momo.png' %}">
+          </div>
+          <hr class="mb-4">
+
+          <button class="btn btn-primary btn-lg btn-block" type="submit"
+            style="background-color: rgb(0, 188, 126);border-color: rgb(0, 188, 126)"
+            onclick="success(); return false;">Continue to checkout</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  var csrftoken = getCookie('csrftoken');
+  function pay() {
+    var url = '/product/pay/fetch/';
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'X-CSRFToken': csrftoken,
+      },
+      body: JSON.stringify({ phone: document.getElementById('phone').value })
+    }).then(res => {
+      return res.json();
+    }
+    ).then((data) => {
+      document.getElementById("ordercheckout").style.display = 'block';
+      document.getElementById("info").style.display = 'block';
+      cus = JSON.parse(data.cus);
+      document.getElementById("name").innerHTML = cus[0].fields.name;
+      document.getElementById("phonee").innerHTML = cus[0].fields.phone;
+      order = JSON.parse(data.order);
+      food = JSON.parse(data.food);
+      var price = 0;
+      for (let i = 0; i < order.length; i++) {
+        var a = document.createElement('li');
+        document.getElementById('list').appendChild(a);
+        a.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'lh-condensed');
+        var b = document.createElement('h6');
+        var c = document.createElement('span');
+        a.append(b, c);
+        b.classList.add('my-0');
+        var size = '';
+        if (order[i].fields.size == 1) size = 'Small';
+        else if (order[i].fields.size == 2) size = 'Normal';
+        else size = 'Big';
+        b.innerHTML = order[i].fields.quantity + ' ' + food[order[i].fields.id_food - 1].fields.name + ' size ' + size;
+        console.log(b);
+        c.classList.add('text-muted')
+        c.innerHTML = '$' + food[order[i].fields.id_food - 1].fields.price * order[i].fields.quantity * order[i].fields.size;
+        price += food[order[i].fields.id_food - 1].fields.price * order[i].fields.quantity * order[i].fields.size;
+      }
+      var a = document.createElement('li');
+      document.getElementById('list').appendChild(a);
+      a.classList.add('list-group-item', 'd-flex', 'justify-content-between')
+      var b = document.createElement('span');
+      var c = document.createElement('strong');
+      a.append(b, c);
+      b.innerHTML = 'Total (USD)';
+      c.innerHTML = '$' + price;
+    });
+  }
+</script>
+{% endblock content %}

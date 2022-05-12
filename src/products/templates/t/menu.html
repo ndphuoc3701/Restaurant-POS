@@ -1,0 +1,284 @@
+{% extends 't/main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="main-content" style="display: block" id="101">
+
+    <div id="menu">
+        <!-- PRODUCT SECTION ---------------------------------------- -->
+
+        <section class="productionSection section" id="shop">
+            <div class="thumbnail-slider" data-thumbnail-slider="true">
+                <div class="thumbnail-slider-viewport-wrapper">
+                    <div class="thumbnail-slider-viewport">
+                        <div class="thumbnail-slider-list">
+                            <a href="#Menu/FastFood" data-title="Fast food" onclick="menucate(1001)">
+                                <span>
+                                    <img src="{% static 'Images/fastfood.jfif' %}">
+                                </span>
+                            </a>
+                            <a href="#Menu/Drinks" data-title="Drinks" onclick="menucate(1002)">
+                                <span>
+                                    <img src="{% static 'Images/drinks.jpg' %}">
+                                </span>
+                            </a>
+                            <a href="#Menu/Main-dishes" data-title="Main dishes" onclick="menucate(1003)">
+                                <span>
+                                    <img src="{% static 'Images/veges.jfif' %}">
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="1001">
+                <div class="sectionIntro">
+                    <div class="headerInfo container">
+                        <h2 class="title">Fast food</h2>
+                    </div>
+                </div>
+                <div class="boxesContainer container">
+                    {% for item in food_list.fast_food %}
+                    <div class="boxContent">
+                        <div class="boxImgDiv">
+                            <img height="175.6" src="{{item.image.url}}" alt="Food Image" class="boxImg">
+                        </div>
+                        <div class="imgDesc">
+                            <span class="imageTitle">{{item.name}}</span>
+                        </div>
+
+                        <span class="imageTitle">
+                            {{item.num_size}} Size
+                        </span>
+                        <span class="boxImgPrice">
+                            ${{item.price}}
+                        </span>
+                        <div class="boxImgBtn">
+                            <button
+                                onclick="add_cart('{{item.id}}','{{item.image.url}}','{{item.name}}','{{item.num_size}}','{{item.price}}')"
+                                type="button" class="addToCartBtn"><i class='bx bxs-cart'></i>ADD TO
+                                CART</button>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div id="1002" style="display: none">
+                <div class="sectionIntro">
+                    <div class="headerInfo container">
+                        <h2 class="title">Drinks</h2>
+                    </div>
+                </div>
+                <div class="boxesContainer container">
+                    {% for item in food_list.drink %}
+                    <div class="boxContent">
+                        <div class="boxImgDiv">
+                            <img height="175.6" src="{{item.image.url}}" alt="Food Image" class="boxImg">
+                        </div>
+                        <div class="imgDesc">
+                            <span class="imageTitle">{{item.name}}</span>
+                        </div>
+
+                        <span class="imageTitle">
+                            {{item.num_size}} Size
+                        </span>
+                        <span class="boxImgPrice">
+                            ${{item.price}}
+                        </span>
+                        <div class="boxImgBtn">
+                            <button
+                                onclick="add_cart('{{item.id}}','{{item.image.url}}','{{item.name}}','{{item.num_size}}','{{item.price}}')"
+                                type="button" class="addToCartBtn"><i class='bx bxs-cart'></i>ADD TO
+                                CART</button>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div id="1003" style="display: none">
+                <div class="sectionIntro">
+                    <div class="headerInfo container">
+                        <h2 class="title">Main dishes</h2>
+                    </div>
+                </div>
+                <div class="boxesContainer container">
+                    {% for item in food_list.main_food %}
+                    <div class="boxContent">
+                        <div class="boxImgDiv">
+                            <img height="175.6" src="{{item.image.url}}" alt="Food Image" class="boxImg">
+                        </div>
+                        <div class="imgDesc">
+                            <span class="imageTitle">{{item.name}}</span>
+                        </div>
+
+                        <span class="imageTitle">
+                            {{item.num_size}} Size
+                        </span>
+                        <span class="boxImgPrice">
+                            ${{item.price}}
+                        </span>
+                        <div class="boxImgBtn">
+                            <button
+                                onclick="add_cart('{{item.id}}','{{item.image.url}}','{{item.name}}','{{item.num_size}}','{{item.price}}')"
+                                type="button" class="addToCartBtn"><i class='bx bxs-cart'></i>ADD TO
+                                CART</button>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    </div>
+    <!-- CART SECTION ---------------------------------------- -->
+    <div id="cart">
+        <section class="cartSection">
+            <div class="sectionIntro">
+                <div class="headerInfo container">
+                    <h2 class="title">Cart</h2>
+                </div>
+            </div>
+            <section class="middleSection " id='phuoc'>
+                <section class="calcSection ">
+                    <div class="btn">
+                        <button onclick="confirm_order('{{id_order}}')" type="button">Add new orders</button>
+                    </div>
+                </section>
+            </section>
+        </section>
+
+        <!--END CART-->
+    </div>
+</div>
+<script>
+    var orders = [];
+    function add_cart(id, img, name, num_size, price) {
+        orders.push({ id: id, num: 1, size: 1 });
+        var idx = orders.length - 1;
+        var a = document.createElement("div");
+        document.getElementById('phuoc').appendChild(a);
+        a.classList.add('firstSide');
+        var b = document.createElement("img");
+        b.src = img;
+        var i = document.createElement("div");
+        i.classList.add('imgDivv');
+        i.style = "display:block";
+        a.append(b, i)
+        var c = document.createElement("div");
+        c.classList.add('topSide');
+        var d = document.createElement("span");
+        d.classList.add('itemName');
+        d.innerHTML = name;
+        var e = document.createElement("span");
+        e.classList.add('closeIcon', 'bx', 'bx-x', 'icon');
+        e.innerHTML = 'x';
+
+        e.addEventListener(
+            'click',
+            () => {
+                orders.splice(idx, idx + 1);
+                a.remove();
+            },
+            false
+        );
+        e.style.cursor = "pointer";
+        var $Osc = {
+            hover: function (event) {
+                event.target.style.color = 'rgb(0, 188, 126)';
+            },
+            out: function (event) {
+                event.target.style.color = "black";
+            }
+
+        }
+        e.addEventListener("mouseover", $Osc.hover, false);
+        e.addEventListener("mouseout", $Osc.out, false);
+
+        c.append(d, e);
+        // var f = document.createElement("span");
+        // f.classList.add('itemGram');
+        var f = document.createElement("label");
+        f.for = 'size';
+        f.innerHTML = 'Size: ';
+        var f1 = document.createElement("select");
+        // f1.id = 'size';
+
+        var f2 = document.createElement("option");
+        f2.value = 1;
+        f2.innerHTML = 'Small';
+        var f3 = document.createElement("option");
+        f3.value = 2;
+        f3.innerHTML = 'Normal';
+        var f4 = document.createElement("option");
+        f4.value = 3;
+        f4.innerHTML = 'Big';
+        f1.appendChild(f2)
+        if (num_size == 2)
+            f1.appendChild(f3)
+        else if (num_size == 3)
+            f1.append(f3, f4)
+
+        var g = document.createElement("div");
+        g.classList.add('bottomSide');
+        i.append(c, f, f1, g)
+        var h = document.createElement("div");
+        h.classList.add('itemPrice');
+        h.innerHTML = '$' + price;
+        f1.addEventListener(
+            'change',
+            function () {
+                orders[idx].size = Number(f1.value);
+                h.innerHTML = '$' + orders[idx].num * price * orders[idx].size;
+            },
+            false
+        );
+        var k = document.createElement("div");
+        k.classList.add('controls');
+        g.append(h, k)
+        var l = document.createElement("span");
+        l.classList.add('count');
+        l.innerHTML = 1;
+        var m = document.createElement("span");
+        m.classList.add('minusIcon');
+        m.addEventListener("click", function () {
+            if (orders[idx].num > 1)
+                orders[idx].num -= 1;
+            l.innerHTML = orders[idx].num;
+            h.innerHTML = '$' + orders[idx].num * price * orders[idx].size;
+        });
+        var n = document.createElement("span");
+        n.classList.add('plusIcon');
+        n.addEventListener("click", function () {
+            orders[idx].num += 1;
+            l.innerHTML = orders[idx].num;
+            h.innerHTML = '$' + orders[idx].num * price * orders[idx].size;
+        });
+        m.innerHTML = '-';
+        n.innerHTML = '+';
+        k.append(m, l, n);
+        console.log(orders)
+    }
+    var csrftoken = getCookie('csrftoken');
+    function confirm_order(id) {
+        var url = '/product/order/' + id + '/confirm/';
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': csrftoken,
+            },
+            body: JSON.stringify(orders)
+        }).then(res => {
+            return res.json();
+        }
+        ).then((data) => {
+            if (data == true) {
+                alert("Success order!!!")
+                window.location.href = "{% url 'product:place-list' %}";
+            }
+            else if (data == false) {
+                alert('You haven\'t taken place yet!!!')
+            }
+            else { alert(data + ' Out of material!!!') }
+        });
+    }
+</script>
+{% endblock content %}

@@ -1,0 +1,50 @@
+{% extends 't/main.html' %}
+{% load static %}
+{% block content %}
+<div class="main-content" style="display: block" id="102">
+  <div id="20001" style="display: block;">
+    <div style="display: flex; flex-direction: row;">
+      <div class="ngang">
+        <table class="content-table">
+          <h3>
+            <center>Table Management</center>
+          </h3>
+          <thead>
+            <tr>
+              <th>
+                <center>Table</center>
+              </th>
+              <th>
+                <center>Status</center>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in place %}
+            <tr>
+              <td>
+                <center>{{ item.id }}<center>
+              </td>
+              <td>
+                <center>
+                  {% if item.status == 0 %}<a class="check" style="text-decoration: none"
+                    href="./{{ item.id }}">Take</a>
+                  {% elif item.status == 2 %} Reserved
+                  {% else %} Taken
+                  {% endif %}
+                </center>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+
+        </table>
+      </div>
+
+    </div>
+    <center>
+      <div class="btn"><a style="text-decoration: none" href="./reservation">Reservation</a></div>
+    </center>
+  </div>
+</div>
+{% endblock content %}

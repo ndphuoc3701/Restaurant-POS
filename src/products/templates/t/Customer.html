@@ -1,0 +1,49 @@
+{% extends 't/main.html' %}
+{% load static %}
+{% block content %}
+<div class="main-content" style="display: block" id="105">
+    <div class="ngang">
+        <table class="content-table">
+            <h3>
+                <center>Customer List</center>
+            </h3>
+            <thead>
+                <tr>
+                    <th>
+                        <center>ID</center>
+                    </th>
+                    <th>
+                        <center>Name</center>
+                    </th>
+                    <th>
+                        <center>Phone number</center>
+                    </th>
+                    <th>
+                        <center>Email</center>
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cus_list %}
+                <tr>
+                    <td>
+                        <center>{{ item.id }}</center>
+                    </td>
+                    <td>
+                        <center>{{ item.name }}</center>
+                    </td>
+                    <td>
+                        <center>{{ item.phone }}</center>
+                    </td>
+                    <td>
+                        <center>{{ item.email }}</center>
+                    </td>
+                    <td><a style="text-decoration: none" class="check" href="./{{ item.id }}">Check</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock content %}

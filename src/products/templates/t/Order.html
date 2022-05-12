@@ -1,0 +1,168 @@
+{% extends 't/main.html' %}
+{% load static %}
+{% block content %}
+<div class="main-content" style="display: block" id="103">
+  <div class="ngang">
+    <table class="content-table">
+      <h3>
+        <center>Order History</center>
+      </h3>
+      <thead>
+        <tr>
+          <th>
+            <center>Order ID</center>
+          </th>
+          <th>
+            <center>Phone number</center>
+          </th>
+          <th>
+            <center>Customer's name</center>
+          </th>
+          <th>
+            <center>Total Price</center>
+          </th>
+          <th>
+            <center>Datetime</center>
+          </th>
+          <th>
+            <center>Check</center>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+
+        {% for item in order_history %}
+        <tr id="3001" class="active-row">
+
+          <td>
+            <center>{{ item.id }}</center>
+          </td>
+          <td>
+            <center>{{ item.id_cus.phone }}</center>
+          </td>
+          <td>
+            <center>{{ item.id_cus.name }}</center>
+          </td>
+          <td>
+            <center>${{ item.totalprice }}</center>
+          </td>
+          <td>
+            <center>{{ item.starttime }}</center>
+          </td>
+          <td>
+            <center><a style="text-decoration: none" class="check" href="./{{ item.id }}">check
+            </center>
+          </td>
+
+        </tr>
+        {% endfor %}
+
+
+
+      </tbody>
+    </table>
+    <div class="background_order" id="30000" onclick="or()" style="z-index: 9998;"></div>
+    <div id="301" class="del" style="position: absolute; display: none; top: 0%; left: 15%; z-index: 9998;">
+      <div class="card">
+        <div class="invoice p-5">
+          <h5>Order information</h5>
+          <span class="font-weight-bold d-block mt-4">Name: {{ order.id_cus.name }}</span>
+          <span class="font-weight-bold d-block mt-4">Phone: {{ order.id_cus.phone }}</span>
+          <span class="font-weight-bold d-block mt-4">Email: {{ order.id_cus.email }}</span>
+          <div class="payment border-top mt-3 mb-3 border-bottom table-responsive">
+            <table class="table table-borderless">
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="py-2"> <span class="d-block text-muted">Start time:</span>
+                      <span>{{ order.starttime}}</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="py-2"> <span class="d-block text-muted">End time:</span>
+                      <span>{{ order.endtime}}</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="py-2"> <span class="d-block text-muted">Order No</span> <span>{{ order.id }}</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="py-2"> <span class="d-block text-muted">Table</span>
+                      <span>{{ order.id_place.id}}</span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="py-2"> <span class="d-block text-muted">Status</span>
+                      <span>{% if order.status == 1 %}Paid
+                        {% else %}Unpaid
+                        {% endif %}
+                      </span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="product border-bottom table-responsive">
+            <table class="table table-borderless">
+              <tbody>
+                {% for item in items %}
+                <tr>
+                  <td width="20%"> <img src="{{item.id_food.image.url}}" width="90"> </td>
+                  <td width="60%"> <span class="font-weight-bold">{{item.id_food.name}}</span>
+                    <div class="product-qty"> <span class="d-block">Quantity: {{item.quantity}}</span>
+                      <span>Size: {% if item.size == 1 %}Small
+                        {% elif item.size == 2 %}Normal
+                        {% else %}Big
+                        {% endif %}
+                      </span>
+                    </div>
+                  </td>
+                  <td width="20%">
+                    <div class="text-right"> <span class="font-weight-bold">${{ item.get_price }}</span> </div>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <div class="row d-flex justify-content-end">
+            <div class="col-md-5">
+              <table class="table table-borderless">
+                <tbody class="totals">
+                  <tr class="border-top border-bottom">
+                    <td>
+                      <div class="text-left"> <span class="font-weight-bold">Total</span> </div>
+                    </td>
+                    <td>
+                      <div class="text-right"> <span class="font-weight-bold">${{ order.totalprice }}</span> </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="paynow" onclick="print()">
+            <a style="text-decoration: none;color: #fff">Print</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  //Menu
+  if ('{{type}}' == 301) {
+    document.getElementById(30000).style.display = 'block';
+    document.getElementById(301).style.display = 'block';
+  }
+
+  function print() {
+    alert("Success print!!!");
+    document.getElementById(30000).style.display = 'none';
+    document.getElementById(301).style.display = 'none';
+  }
+</script>
+{% endblock content %}
