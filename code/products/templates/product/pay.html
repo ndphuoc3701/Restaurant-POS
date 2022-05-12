@@ -19,7 +19,6 @@
             },
             body: JSON.stringify({ phone: document.getElementById('phone').value })
         }).then(res => {
-            // document.getElementById("d").innerHTML = res;
             return res.json();
         }
         ).then((data) => {
@@ -31,17 +30,7 @@
 
         var url = '/product/pay/confirm/';
 
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'X-CSRFToken': csrftoken,
-            },
-            body: JSON.stringify({ phone: document.getElementById('phone').value })
-        }).then(res => {
-            // document.getElementById("d").innerHTML = res;
-            return res.json();
-        }
-        ).then(() => {
+        fetch(url).then(() => {
             window.location.href = "{% url 'product:place-list' %}";
         });
 

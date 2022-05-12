@@ -1,1767 +1,284 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 't/main.html' %}
+{% load static %}
+{% block content %}
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-  <link rel="icon" href="./Images/Ico.ico">
-  <title>POS Restaurants</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
-  <link href="https://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Custom styles for this template -->
-  <link href="https://getbootstrap.com/docs/4.1/examples/checkout/form-validation.css" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'css/main.css' %}">
-  <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-  <style>
-    .card {
-      width: 700px;
-      height: auto;
-    }
-  </style>
-</head>
-
-<body>
-
-  <input type="checkbox" id="sidebar-toggle">
-  <div class="sidebar">
-    <div class="sidebar-header">
-      <h3 class="brand">
-        <span class="ti-unlink"></span>
-        <span>BK HCM</span>
-      </h3>
-      <label for="sidebar-toggle" class="ti-menu-alt"></label>
-    </div>
-
-    <div class="sidebar-menu">
-      <ul>
-        <li>
-          <a href="/product/home" onclick="my(100)">
-            <span class="ti-home"></span>
-            <span>Home</span>
-          </a>
-        </li>
-        <li>
-          <a href="/product/order/1" onclick="my(101)">
-            <span class="ti-menu"></span>
-            <span>Menu</span>
-          </a>
-        </li>
-        <li>
-          <a href="/product/place" onclick="my(102)">
-            <span class="ti-map"></span>
-            <span>Table</span>
-          </a>
-        </li>
-        <li>
-          <a href="/product/history" onclick="my(103)">
-            <span class="ti-agenda"></span>
-            <span>Order</span>
-          </a>
-        </li>
-        <li>
-          <a href="#Customer" onclick="my(105)">
-            <span class="ti-user"></span>
-            <span>Customer</span>
-          </a>
-        </li>
-        <li>
-          <a href="#Account">
-            <span class="ti-settings"></span>
-            <span>Account</span>
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <div class="main-content" id="100">
-    <section class="homeSection" id="home">
-
-      <div class="content grid ">
-        <div class="homeText">
-          <span>WELCOME TO OUR</span>
-          <h1 class="introText">Healthy food collection</h1>
-          <p class="homeParagraph">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestias, voluptatem quaerat illum earum suscipit
-            rem excepturi nulla sapiente est vitae?
-          </p>
-
-          <div class="btn" onclick="menu()">
-            <a href="#menu">Order Now</a>
-          </div>
-        </div>
-
-        <div class="homeImg">
-          <img src="./Images/7.png" alt="Home Food Image" class="home_Image">
-        </div>
-
-      </div>
-
-      <div class="circle"></div>
-
-    </section>
-  </div>
-  <div class="main-content" id="101">
+<div class="main-content" style="display: block" id="101">
 
     <div id="menu">
-      <!-- PRODUCT SECTION ---------------------------------------- -->
+        <!-- PRODUCT SECTION ---------------------------------------- -->
 
-      <section class="productionSection section" id="shop">
-        <div class="thumbnail-slider" data-thumbnail-slider="true">
-          <div class="thumbnail-slider-viewport-wrapper">
-            <div class="thumbnail-slider-viewport">
-              <div class="thumbnail-slider-list">
-                <a href="#Menu/FastFood" data-title="Fast food" onclick="menucate(1001)">
-                  <span>
-                    <img src="./Images/fastfood.jfif">
-                  </span>
-                </a>
-                <a href="#Menu/Drinks" data-title="Drinks" onclick="menucate(1002)">
-                  <span>
-                    <img src="./Images/drinks.jpg">
-                  </span>
-                </a>
-                <a href="#Menu/Vegetables" data-title="Vegetables" onclick="menucate(1003)">
-                  <span>
-                    <img src="./Images/veges.jfif">
-                  </span>
-                </a>
-              </div>
+        <section class="productionSection section" id="shop">
+            <div class="thumbnail-slider" data-thumbnail-slider="true">
+                <div class="thumbnail-slider-viewport-wrapper">
+                    <div class="thumbnail-slider-viewport">
+                        <div class="thumbnail-slider-list">
+                            <a href="#Menu/FastFood" data-title="Fast food" onclick="menucate(1001)">
+                                <span>
+                                    <img src="{% static 'Images/fastfood.jfif' %}">
+                                </span>
+                            </a>
+                            <a href="#Menu/Drinks" data-title="Drinks" onclick="menucate(1002)">
+                                <span>
+                                    <img src="{% static 'Images/drinks.jpg' %}">
+                                </span>
+                            </a>
+                            <a href="#Menu/Main-dishes" data-title="Main dishes" onclick="menucate(1003)">
+                                <span>
+                                    <img src="{% static 'Images/veges.jfif' %}">
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <div id="1001">
-          <div class="sectionIntro">
-            <div class="headerInfo container">
-              <h2 class="title">Fast food</h2>
-            </div>
-          </div>
-          <div class="boxesContainer container">
-            <div class="boxContent">
-              <div class="boxImgDiv">
-                <img src="./Images/7.png" alt="Food Image" class="boxImg">
-              </div>
-              <div class="imgDesc">
-                <span class="imageTitle">Food one</span>
-              </div>
+            <div id="1001">
+                <div class="sectionIntro">
+                    <div class="headerInfo container">
+                        <h2 class="title">Fast food</h2>
+                    </div>
+                </div>
+                <div class="boxesContainer container">
+                    {% for item in food_list.fast_food %}
+                    <div class="boxContent">
+                        <div class="boxImgDiv">
+                            <img height="175.6" src="{{item.image.url}}" alt="Food Image" class="boxImg">
+                        </div>
+                        <div class="imgDesc">
+                            <span class="imageTitle">{{item.name}}</span>
+                        </div>
 
-              <span class="imageTitle">
-                Size
-              </span>
-              <span class="boxImgPrice">
-                $8.24
-              </span>
-              <div class="boxImgBtn">
-                <button type="button" class="addToCartBtn"><i class='bx bxs-cart'></i>ADD TO CART</button>
-              </div>
+                        <span class="imageTitle">
+                            {{item.num_size}} Size
+                        </span>
+                        <span class="boxImgPrice">
+                            ${{item.price}}
+                        </span>
+                        <div class="boxImgBtn">
+                            <button
+                                onclick="add_cart('{{item.id}}','{{item.image.url}}','{{item.name}}','{{item.num_size}}','{{item.price}}')"
+                                type="button" class="addToCartBtn"><i class='bx bxs-cart'></i>ADD TO
+                                CART</button>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
-            <div class="boxContent">
-              <div class="boxImgDiv">
-                <img src="./Images/imagePng.png" alt="Food Image" class="boxImg">
-              </div>
-              <div class="imgDesc">
-                <span class="imageTitle">Food Two</span>
-              </div>
+            <div id="1002" style="display: none">
+                <div class="sectionIntro">
+                    <div class="headerInfo container">
+                        <h2 class="title">Drinks</h2>
+                    </div>
+                </div>
+                <div class="boxesContainer container">
+                    {% for item in food_list.drink %}
+                    <div class="boxContent">
+                        <div class="boxImgDiv">
+                            <img height="175.6" src="{{item.image.url}}" alt="Food Image" class="boxImg">
+                        </div>
+                        <div class="imgDesc">
+                            <span class="imageTitle">{{item.name}}</span>
+                        </div>
 
-              <span class="imageTitle">
-                Size
-              </span>
-              <span class="boxImgPrice">
-                $9.24
-              </span>
-              <div class="boxImgBtn">
-                <button type="button" class="addToCartBtn"><i class='bx bxs-cart'></i>ADD TO CART</button>
-              </div>
+                        <span class="imageTitle">
+                            {{item.num_size}} Size
+                        </span>
+                        <span class="boxImgPrice">
+                            ${{item.price}}
+                        </span>
+                        <div class="boxImgBtn">
+                            <button
+                                onclick="add_cart('{{item.id}}','{{item.image.url}}','{{item.name}}','{{item.num_size}}','{{item.price}}')"
+                                type="button" class="addToCartBtn"><i class='bx bxs-cart'></i>ADD TO
+                                CART</button>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
-            <div class="boxContent">
-              <div class="boxImgDiv">
-                <img src="./Images/imagePng.png" alt="Food Image" class="boxImg">
-              </div>
-              <div class="imgDesc">
-                <span class="imageTitle">Food Three</span>
-              </div>
+            <div id="1003" style="display: none">
+                <div class="sectionIntro">
+                    <div class="headerInfo container">
+                        <h2 class="title">Main dishes</h2>
+                    </div>
+                </div>
+                <div class="boxesContainer container">
+                    {% for item in food_list.main_food %}
+                    <div class="boxContent">
+                        <div class="boxImgDiv">
+                            <img height="175.6" src="{{item.image.url}}" alt="Food Image" class="boxImg">
+                        </div>
+                        <div class="imgDesc">
+                            <span class="imageTitle">{{item.name}}</span>
+                        </div>
 
-              <span class="imageTitle">
-                Size
-              </span>
-              <span class="boxImgPrice">
-                $16.24
-              </span>
-              <div class="boxImgBtn">
-                <button type="button" class="addToCartBtn"><i class='bx bxs-cart'></i>ADD TO CART</button>
-              </div>
+                        <span class="imageTitle">
+                            {{item.num_size}} Size
+                        </span>
+                        <span class="boxImgPrice">
+                            ${{item.price}}
+                        </span>
+                        <div class="boxImgBtn">
+                            <button
+                                onclick="add_cart('{{item.id}}','{{item.image.url}}','{{item.name}}','{{item.num_size}}','{{item.price}}')"
+                                type="button" class="addToCartBtn"><i class='bx bxs-cart'></i>ADD TO
+                                CART</button>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
-            <div class="boxContent">
-              <div class="boxImgDiv">
-                <img src="./Images/imagepng4.png" alt="Food Image" class="boxImg">
-              </div>
-              <div class="imgDesc">
-                <span class="imageTitle">Lorem Ipsum Food</span>
-              </div>
-
-              <span class="imageTitle">
-                Size
-              </span>
-              <span class="boxImgPrice">
-                $6.24
-              </span>
-              <div class="boxImgBtn">
-                <button type="button" class="addToCart"><i class='bx bxs-cart'></i>ADD TO CART</button>
-              </div>
-            </div>
-            <div class="boxContent sHide">
-              <div class="boxImgDiv">
-                <img src="./Images/imgP.png" alt="Food Image" class="boxImg">
-              </div>
-              <div class="imgDesc">
-                <span class="imageTitle">Lorem Ipsum Food</span>
-              </div>
-
-              <span class="imageTitle">
-                Size
-              </span>
-              <span class="boxImgPrice">
-                $6.24
-              </span>
-              <div class="boxImgBtn">
-                <button type="button" class="addToCart"><i class='bx bxs-cart'></i>ADD TO CART</button>
-              </div>
-            </div>
-            <div class="boxContent sHide">
-              <div class="boxImgDiv">
-                <img src="./Images/imgPng7.png" alt="Food Image" class="boxImg">
-              </div>
-              <div class="imgDesc">
-                <span class="imageTitle">Lorem Ipsum Food</span>
-              </div>
-
-              <span class="imageTitle">
-                Size
-              </span>
-              <span class="boxImgPrice">
-                $6.24
-              </span>
-              <div class="boxImgBtn">
-                <button type="button" class="addToCart"><i class='bx bxs-cart'></i>ADD TO CART</button>
-              </div>
-            </div>
-            <div class="boxContent sHide">
-              <div class="boxImgDiv">
-                <img src="./Images/imgPng6.png" alt="Food Image" class="boxImg">
-              </div>
-              <div class="imgDesc">
-                <span class="imageTitle">Lorem Ipsum Food</span>
-              </div>
-
-              <span class="imageTitle">
-                Size
-              </span>
-              <span class="boxImgPrice">
-                $6.24
-              </span>
-              <div class="boxImgBtn">
-                <button type="button" class="addToCart"><i class='bx bxs-cart'></i>ADD TO CART</button>
-              </div>
-            </div>
-            <div class="boxContent sHide">
-              <div class="boxImgDiv">
-                <img src="./Images/imgPng5.png" alt="Food Image" class="boxImg">
-              </div>
-              <div class="imgDesc">
-                <span class="imageTitle">Lorem Ipsum Food</span>
-              </div>
-
-              <span class="imageTitle">
-                Size
-              </span>
-              <span class="boxImgPrice">
-                $6.24
-              </span>
-              <div class="boxImgBtn">
-                <button type="button" class="addToCart"><i class='bx bxs-cart'></i>ADD TO CART</button>
-              </div>
-            </div>
-
-          </div>
-        </div>
-        <div id="1002" style="display: none">
-          <div class="sectionIntro">
-            <div class="headerInfo container">
-              <h2 class="title">Drinks</h2>
-            </div>
-          </div>
-          <div class="boxesContainer container">
-            <div class="boxContent">
-              <div class="boxImgDiv">
-                <img src="./Images/7.png" alt="Food Image" class="boxImg">
-              </div>
-              <div class="imgDesc">
-                <span class="imageTitle">Food one</span>
-              </div>
-
-              <span class="imageTitle">
-                Size
-              </span>
-              <span class="boxImgPrice">
-                $8.24
-              </span>
-              <div class="boxImgBtn">
-                <button type="button" class="addToCartBtn"><i class='bx bxs-cart'></i>ADD TO CART</button>
-              </div>
-            </div>
-            <div class="boxContent">
-              <div class="boxImgDiv">
-                <img src="./Images/imagePng.png" alt="Food Image" class="boxImg">
-              </div>
-              <div class="imgDesc">
-                <span class="imageTitle">Food Two</span>
-              </div>
-
-              <span class="imageTitle">
-                Size
-              </span>
-              <span class="boxImgPrice">
-                $9.24
-              </span>
-              <div class="boxImgBtn">
-                <button type="button" class="addToCartBtn"><i class='bx bxs-cart'></i>ADD TO CART</button>
-              </div>
-            </div>
-            <div class="boxContent">
-              <div class="boxImgDiv">
-                <img src="./Images/imagePng.png" alt="Food Image" class="boxImg">
-              </div>
-              <div class="imgDesc">
-                <span class="imageTitle">Food Three</span>
-              </div>
-
-              <span class="imageTitle">
-                Size
-              </span>
-              <span class="boxImgPrice">
-                $16.24
-              </span>
-              <div class="boxImgBtn">
-                <button type="button" class="addToCartBtn"><i class='bx bxs-cart'></i>ADD TO CART</button>
-              </div>
-            </div>
-            <div class="boxContent">
-              <div class="boxImgDiv">
-                <img src="./Images/imagepng4.png" alt="Food Image" class="boxImg">
-              </div>
-              <div class="imgDesc">
-                <span class="imageTitle">Lorem Ipsum Food</span>
-              </div>
-
-              <span class="imageTitle">
-                Size
-              </span>
-              <span class="boxImgPrice">
-                $6.24
-              </span>
-              <div class="boxImgBtn">
-                <button type="button" class="addToCart"><i class='bx bxs-cart'></i>ADD TO CART</button>
-              </div>
-            </div>
-            <div class="boxContent sHide">
-              <div class="boxImgDiv">
-                <img src="./Images/imgP.png" alt="Food Image" class="boxImg">
-              </div>
-              <div class="imgDesc">
-                <span class="imageTitle">Lorem Ipsum Food</span>
-              </div>
-
-              <span class="imageTitle">
-                Size
-              </span>
-              <span class="boxImgPrice">
-                $6.24
-              </span>
-              <div class="boxImgBtn">
-                <button type="button" class="addToCart"><i class='bx bxs-cart'></i>ADD TO CART</button>
-              </div>
-            </div>
-            <div class="boxContent sHide">
-              <div class="boxImgDiv">
-                <img src="./Images/imgPng7.png" alt="Food Image" class="boxImg">
-              </div>
-              <div class="imgDesc">
-                <span class="imageTitle">Lorem Ipsum Food</span>
-              </div>
-
-              <span class="imageTitle">
-                Size
-              </span>
-              <span class="boxImgPrice">
-                $6.24
-              </span>
-              <div class="boxImgBtn">
-                <button type="button" class="addToCart"><i class='bx bxs-cart'></i>ADD TO CART</button>
-              </div>
-            </div>
-            <div class="boxContent sHide">
-              <div class="boxImgDiv">
-                <img src="./Images/imgPng6.png" alt="Food Image" class="boxImg">
-              </div>
-              <div class="imgDesc">
-                <span class="imageTitle">Lorem Ipsum Food</span>
-              </div>
-
-              <span class="imageTitle">
-                Size
-              </span>
-              <span class="boxImgPrice">
-                $6.24
-              </span>
-              <div class="boxImgBtn">
-                <button type="button" class="addToCart"><i class='bx bxs-cart'></i>ADD TO CART</button>
-              </div>
-            </div>
-            <div class="boxContent sHide">
-              <div class="boxImgDiv">
-                <img src="./Images/imgPng5.png" alt="Food Image" class="boxImg">
-              </div>
-              <div class="imgDesc">
-                <span class="imageTitle">Lorem Ipsum Food</span>
-              </div>
-
-              <span class="imageTitle">
-                Size
-              </span>
-              <span class="boxImgPrice">
-                $6.24
-              </span>
-              <div class="boxImgBtn">
-                <button type="button" class="addToCart"><i class='bx bxs-cart'></i>ADD TO CART</button>
-              </div>
-            </div>
-
-          </div>
-        </div>
-        <div id="1003" style="display: none">
-          <div class="sectionIntro">
-            <div class="headerInfo container">
-              <h2 class="title">Vegestables</h2>
-            </div>
-          </div>
-          <div class="boxesContainer container">
-            <div class="boxContent">
-              <div class="boxImgDiv">
-                <img src="./Images/7.png" alt="Food Image" class="boxImg">
-              </div>
-              <div class="imgDesc">
-                <span class="imageTitle">Food one</span>
-              </div>
-
-              <span class="imageTitle">
-                Size
-              </span>
-              <span class="boxImgPrice">
-                $8.24
-              </span>
-              <div class="boxImgBtn">
-                <button type="button" class="addToCartBtn"><i class='bx bxs-cart'></i>ADD TO CART</button>
-              </div>
-            </div>
-            <div class="boxContent">
-              <div class="boxImgDiv">
-                <img src="./Images/imagePng.png" alt="Food Image" class="boxImg">
-              </div>
-              <div class="imgDesc">
-                <span class="imageTitle">Food Two</span>
-              </div>
-
-              <span class="imageTitle">
-                Size
-              </span>
-              <span class="boxImgPrice">
-                $9.24
-              </span>
-              <div class="boxImgBtn">
-                <button type="button" class="addToCartBtn"><i class='bx bxs-cart'></i>ADD TO CART</button>
-              </div>
-            </div>
-            <div class="boxContent">
-              <div class="boxImgDiv">
-                <img src="./Images/imagePng.png" alt="Food Image" class="boxImg">
-              </div>
-              <div class="imgDesc">
-                <span class="imageTitle">Food Three</span>
-              </div>
-
-              <span class="imageTitle">
-                Size
-              </span>
-              <span class="boxImgPrice">
-                $16.24
-              </span>
-              <div class="boxImgBtn">
-                <button type="button" class="addToCartBtn"><i class='bx bxs-cart'></i>ADD TO CART</button>
-              </div>
-            </div>
-            <div class="boxContent">
-              <div class="boxImgDiv">
-                <img src="./Images/imagepng4.png" alt="Food Image" class="boxImg">
-              </div>
-              <div class="imgDesc">
-                <span class="imageTitle">Lorem Ipsum Food</span>
-              </div>
-
-              <span class="imageTitle">
-                Size
-              </span>
-              <span class="boxImgPrice">
-                $6.24
-              </span>
-              <div class="boxImgBtn">
-                <button type="button" class="addToCart"><i class='bx bxs-cart'></i>ADD TO CART</button>
-              </div>
-            </div>
-            <div class="boxContent sHide">
-              <div class="boxImgDiv">
-                <img src="./Images/imgP.png" alt="Food Image" class="boxImg">
-              </div>
-              <div class="imgDesc">
-                <span class="imageTitle">Lorem Ipsum Food</span>
-              </div>
-
-              <span class="imageTitle">
-                Size
-              </span>
-              <span class="boxImgPrice">
-                $6.24
-              </span>
-              <div class="boxImgBtn">
-                <button type="button" class="addToCart"><i class='bx bxs-cart'></i>ADD TO CART</button>
-              </div>
-            </div>
-            <div class="boxContent sHide">
-              <div class="boxImgDiv">
-                <img src="./Images/imgPng7.png" alt="Food Image" class="boxImg">
-              </div>
-              <div class="imgDesc">
-                <span class="imageTitle">Lorem Ipsum Food</span>
-              </div>
-
-              <span class="imageTitle">
-                Size
-              </span>
-              <span class="boxImgPrice">
-                $6.24
-              </span>
-              <div class="boxImgBtn">
-                <button type="button" class="addToCart"><i class='bx bxs-cart'></i>ADD TO CART</button>
-              </div>
-            </div>
-            <div class="boxContent sHide">
-              <div class="boxImgDiv">
-                <img src="./Images/imgPng6.png" alt="Food Image" class="boxImg">
-              </div>
-              <div class="imgDesc">
-                <span class="imageTitle">Lorem Ipsum Food</span>
-              </div>
-
-              <span class="imageTitle">
-                Size
-              </span>
-              <span class="boxImgPrice">
-                $6.24
-              </span>
-              <div class="boxImgBtn">
-                <button type="button" class="addToCart"><i class='bx bxs-cart'></i>ADD TO CART</button>
-              </div>
-            </div>
-            <div class="boxContent sHide">
-              <div class="boxImgDiv">
-                <img src="./Images/imgPng5.png" alt="Food Image" class="boxImg">
-              </div>
-              <div class="imgDesc">
-                <span class="imageTitle">Lorem Ipsum Food</span>
-              </div>
-
-              <span class="imageTitle">
-                Size
-              </span>
-              <span class="boxImgPrice">
-                $6.24
-              </span>
-              <div class="boxImgBtn">
-                <button type="button" class="addToCart"><i class='bx bxs-cart'></i>ADD TO CART</button>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
+        </section>
     </div>
     <!-- CART SECTION ---------------------------------------- -->
     <div id="cart">
-      <section class="cartSection">
-        <div class="sectionIntro">
-          <div class="headerInfo container">
-            <h2 class="title">Cart</h2>
-          </div>
-        </div>
-        <section class="middleSection ">
-          <div class="firstSide">
-            <img src="./Images/img12.jpg" alt="Food Image">
-            <div class="imgDivv">
-              <div class="topSide">
-                <span class="itemName">Food One</span>
-                <span class="closeIcon"><i class='bx bx-x icon'></i></span>
-              </div>
-              <span class="itemGram">Size: 12g</span>
-              <div class="bottomSide">
-                <span class="itemPrice">$12</span>
-                <div class="controls">
-                  <span class="minusIcon" onclick="myFunction(-1,1,0)">-</span>
-                  <span class="count" id="1">1</span>
-                  <span class="plusIcon" onclick="myFunction(1,1,0)">+</span>
+        <section class="cartSection">
+            <div class="sectionIntro">
+                <div class="headerInfo container">
+                    <h2 class="title">Cart</h2>
                 </div>
-              </div>
             </div>
-
-          </div>
-          <div class="firstSide">
-            <img src="./Images/img5.jpg" alt="Food Image">
-            <div class="imgDivv">
-              <div class="topSide">
-                <span class="itemName">Food Two</span>
-                <span class="closeIcon"><i class='bx bx-x icon'></i></span>
-              </div>
-              <span class="itemGram">Size: 16g</span>
-              <div class="bottomSide">
-                <span class="itemPrice">$8</span>
-                <div class="controls">
-                  <span class="minusIcon" onclick="myFunction(-1,2,1)">-</span>
-                  <span class="count" id="2">1</span>
-                  <span class="plusIcon" onclick="myFunction(1,2,1)">+</span>
-                </div>
-              </div>
-            </div>
-
-          </div>
-          <div class="firstSide">
-            <img src="./Images/img7.jpg" alt="Food Image">
-            <div class="imgDivv">
-              <div class="topSide">
-                <span class="itemName">Food Three</span>
-                <span class="closeIcon"><i class='bx bx-x icon'></i></span>
-              </div>
-              <span class="itemGram">Size: 39g</span>
-              <div class="bottomSide">
-                <span class="itemPrice">$9</span>
-                <div class="controls">
-                  <span class="minusIcon" onclick="myFunction(-1,3,2)">-</span>
-                  <span class="count" id="3">1</span>
-                  <span class="plusIcon" onclick="myFunction(1,3,2)">+</span>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <section class="calcSection ">
-            <div class="row">
-              <span class="rowTitle">Table</span>
-              <input value="1" type="number" name="quantity" min="1" max="10" class="numtable">
-            </div>
-            <div class="row">
-              <span class="rowTitle">Total</span>
-              <span id="4"></span>
-            </div>
-
-            <div class="btn">
-              <button type="button">Add new orders</button>
-            </div>
-          </section>
+            <section class="middleSection " id='phuoc'>
+                <section class="calcSection ">
+                    <div class="btn">
+                        <button onclick="confirm_order('{{id_order}}')" type="button">Add new orders</button>
+                    </div>
+                </section>
+            </section>
         </section>
-      </section>
 
-      <!--END CART-->
+        <!--END CART-->
     </div>
-  </div>
-  <div class="main-content" id="102">
-    <div id="20001" style="display: block;">
-      <div class="search">
-        <div class="wrap">
-          <div class="search">
-            <select class="searchTerm" data-value="List by time" id="typelist">
-              <option value="20001">List by time</option>
-              <option value="20002">List by reservation</option>
-            </select>
-            <button type="submit" class="searchButton" onclick="typelistr(1)">
-              <i class="fa fa-search"></i>
-            </button>
-          </div>
-        </div>
-        <div class="wrap">
-          <div class="search">
-            <input type="date" class="searchTerm" placeholder="Search Day">
-            <button type="submit" class="searchButton">
-              <i class="fa fa-search"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-      <div style="display: flex; flex-direction: row;">
-        <div class="ngang">
-          <table class="content-table">
-            <thead>
-              <tr>
-                <th>Table</th>
-                <th>9:00</th>
-                <th>11:00</th>
-                <th>15:00</th>
-                <th>17:00</th>
-                <th>19:00</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr id="2001">
-                <td>1</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-              </tr>
-              <tr id="2002">
-                <td>2</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-              </tr>
-              <tr id="2003">
-                <td>3</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-              </tr>
-              <tr id="2004">
-                <td>4</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-              </tr>
-              <tr id="2005">
-                <td>5</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-              </tr>
-              <tr id="2006">
-                <td>6</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-              </tr>
-              <tr id="2007">
-                <td>7</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-              </tr>
-              <tr id="2008">
-                <td>8</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-              </tr>
-              <tr id="2009">
-                <td>9</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-              </tr>
-              <tr id="2010">
-                <td>10</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-              </tr>
+</div>
+<script>
+    var orders = [];
+    function add_cart(id, img, name, num_size, price) {
+        orders.push({ id: id, num: 1, size: 1 });
+        var idx = orders.length - 1;
+        var a = document.createElement("div");
+        document.getElementById('phuoc').appendChild(a);
+        a.classList.add('firstSide');
+        var b = document.createElement("img");
+        b.src = img;
+        var i = document.createElement("div");
+        i.classList.add('imgDivv');
+        i.style = "display:block";
+        a.append(b, i)
+        var c = document.createElement("div");
+        c.classList.add('topSide');
+        var d = document.createElement("span");
+        d.classList.add('itemName');
+        d.innerHTML = name;
+        var e = document.createElement("span");
+        e.classList.add('closeIcon', 'bx', 'bx-x', 'icon');
+        e.innerHTML = 'x';
 
-            </tbody>
+        e.addEventListener(
+            'click',
+            () => {
+                orders.splice(idx, idx + 1);
+                a.remove();
+            },
+            false
+        );
+        e.style.cursor = "pointer";
+        var $Osc = {
+            hover: function (event) {
+                event.target.style.color = 'rgb(0, 188, 126)';
+            },
+            out: function (event) {
+                event.target.style.color = "black";
+            }
 
-          </table>
-        </div>
-        <section class="banner">
-
-          <div class="card-content">
-            <h3>Reservation</h3>
-            <form>
-              <div class="form-row">
-                <input type="date" name="days">
-
-                <select name="hours">
-                  <option value="hour-select">Select Hour</option>
-                  <option value="9:00">9: 00</option>
-                  <option value="11:00">11: 00</option>
-                  <option value="15:00">15: 00</option>
-                  <option value="17:00">17: 00</option>
-                  <option value="19:00">19: 00</option>
-                </select>
-              </div>
-
-              <div class="form-row">
-                <input type="text" placeholder="Full Name">
-                <input type="text" placeholder="Phone Number">
-              </div>
-
-              <div class="form-row">
-                <input type="number" placeholder="Table" min="1" max="10">
-                <input type="submit" value="Add Severation">
-              </div>
-            </form>
-          </div>
-        </section>
-      </div>
-    </div>
-    <div id="20002" style="display: none;">
-      <div class="search">
-        <div class="wrap">
-          <div class="search">
-            <select class="searchTerm" data-value="List by reservation" id="typelist2">
-              <option value="20002">List by reservation</option>
-              <option value="20001">List by time</option>
-            </select>
-            <button type="submit" class="searchButton" onclick="typelistr(2)">
-              <i class="fa fa-search"></i>
-            </button>
-          </div>
-        </div>
-        <div class="wrap">
-          <div class="search">
-            <input type="text" class="searchTerm" placeholder="Search ID">
-            <button type="submit" class="searchButton">
-              <i class="fa fa-search"></i>
-            </button>
-          </div>
-        </div>
-        <div class="wrap">
-          <div class="search">
-            <input type="text" class="searchTerm" placeholder="Search Name">
-            <button type="submit" class="searchButton">
-              <i class="fa fa-search"></i>
-            </button>
-          </div>
-        </div>
-        <div class="wrap">
-          <div class="search">
-            <input type="text" class="searchTerm" placeholder="Search Mail/Phone">
-            <button type="submit" class="searchButton">
-              <i class="fa fa-search"></i>
-            </button>
-          </div>
-        </div>
-        <div class="wrap">
-          <div class="search">
-            <input type="date" class="searchTerm" placeholder="Search Day">
-            <button type="submit" class="searchButton">
-              <i class="fa fa-search"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-      <div style="display: flex; flex-direction: row;">
-        <div class="ngang">
-          <table class="content-table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Mail/Phone</th>
-                <th>Table</th>
-                <th>Time</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr id="2101">
-                <td>1</td>
-                <td>abc</td>
-                <td>a@gmail.com</td>
-                <td>+</td>
-                <td>+</td>
-              </tr>
-              <tr id="2102">
-                <td>2</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-              </tr>
-              <tr id="2103">
-                <td>3</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-              </tr>
-              <tr id="2104">
-                <td>4</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-              </tr>
-              <tr id="2105">
-                <td>5</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-              </tr>
-              <tr id="2106">
-                <td>6</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-              </tr>
-              <tr id="2107">
-                <td>7</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-              </tr>
-              <tr id="2108">
-                <td>8</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-              </tr>
-              <tr id="2109">
-                <td>9</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-              </tr>
-              <tr id="2110">
-                <td>10</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-                <td>+</td>
-              </tr>
-
-            </tbody>
-
-          </table>
-        </div>
-        <section class="banner">
-
-          <div class="card-content">
-            <h3>Reservation</h3>
-            <form>
-              <div class="form-row">
-                <input type="date" name="days">
-
-                <select name="hours">
-                  <option value="hour-select">Select Hour</option>
-                  <option value="9:00">9: 00</option>
-                  <option value="11:00">11: 00</option>
-                  <option value="15:00">15: 00</option>
-                  <option value="17:00">17: 00</option>
-                  <option value="19:00">19: 00</option>
-                </select>
-              </div>
-
-              <div class="form-row">
-                <input type="text" placeholder="Full Name">
-                <input type="text" placeholder="Phone Number">
-              </div>
-
-              <div class="form-row">
-                <input type="number" placeholder="Table" min="1" max="10">
-                <input type="submit" value="Add Severation">
-              </div>
-            </form>
-          </div>
-        </section>
-      </div>
-    </div>
-  </div>
-  <div class="main-content" id="103">
-    <div class="search">
-      <div class="wrap">
-        <div class="search">
-          <input type="date" class="searchTerm" placeholder="Search Day">
-          <button type="submit" class="searchButton">
-            <i class="fa fa-search"></i>
-          </button>
-        </div>
-      </div>
-      <div class="wrap">
-        <div class="search">
-          <input type="text" class="searchTerm" placeholder="Search Order ID">
-          <button type="submit" class="searchButton">
-            <i class="fa fa-search"></i>
-          </button>
-        </div>
-      </div>
-      <div class="wrap">
-        <div class="search">
-          <input type="text" class="searchTerm" placeholder="Search Phone/Email">
-          <button type="submit" class="searchButton">
-            <i class="fa fa-search"></i>
-          </button>
-        </div>
-      </div>
-      <div class="wrap">
-        <div class="search">
-          <input type="text" class="searchTerm" placeholder="Search Name">
-          <button type="submit" class="searchButton">
-            <i class="fa fa-search"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="ngang">
-      <table class="content-table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Order ID</th>
-            <th>Phone number/email</th>
-            <th>Customer's name</th>
-            <th>Total Price</th>
-            <th>Status</th>
-            <th>Datetime</th>
-            <th>Check</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr id="3001">
-            <td>1</td>
-            <td>1534</td>
-            <td>123456789</td>
-            <td> LOL </td>
-            <td>$100</td>
-            <td>Paid</td>
-            <td>10/20/2021</td>
-            <td><button class="check" onclick="ord(301,3001)">check</button></td>
-          </tr>
-          <tr id="3002" class="active-row">
-            <td>2</td>
-            <td>1534</td>
-            <td>123456789</td>
-            <td>CLCLCL</td>
-            <td>$100</td>
-            <td>Paid</td>
-            <td>10/20/2021</td>
-            <td><button class="check" onclick="ord(302,3002)">check</button></td>
-          </tr>
-          <tr id="3003" class="active-row">
-            <td>2</td>
-            <td>1534</td>
-            <td>123456789</td>
-            <td>CLCLCL</td>
-            <td>$100</td>
-            <td>Paid</td>
-            <td>10/20/2021</td>
-            <td><button class="check" onclick="ord(302,3002)">check</button></td>
-          </tr>
-          <tr id="3004" class="active-row">
-            <td>2</td>
-            <td>1534</td>
-            <td>123456789</td>
-            <td>CLCLCL</td>
-            <td>$100</td>
-            <td>Paid</td>
-            <td>10/20/2021</td>
-            <td><button class="check" onclick="ord(302,3002)">check</button></td>
-          </tr>
-          <tr id="3005" class="active-row">
-            <td>2</td>
-            <td>1534</td>
-            <td>123456789</td>
-            <td>CLCLCL</td>
-            <td>$100</td>
-            <td>Paid</td>
-            <td>10/20/2021</td>
-            <td><button class="check" onclick="ord(302,3002)">check</button></td>
-          </tr>
-          <tr id="3006" class="active-row">
-            <td>2</td>
-            <td>1534</td>
-            <td>123456789</td>
-            <td>CLCLCL</td>
-            <td>$100</td>
-            <td>Paid</td>
-            <td>10/20/2021</td>
-            <td><button class="check" onclick="ord(302,3002)">check</button></td>
-          </tr>
-          <tr id="3007" class="active-row">
-            <td>2</td>
-            <td>1534</td>
-            <td>123456789</td>
-            <td>CLCLCL</td>
-            <td>$100</td>
-            <td>Paid</td>
-            <td>10/20/2021</td>
-            <td><button class="check" onclick="ord(302,3002)">check</button></td>
-          </tr>
-          <tr id="3008" class="active-row">
-            <td>2</td>
-            <td>1534</td>
-            <td>123456789</td>
-            <td>CLCLCL</td>
-            <td>$100</td>
-            <td>Paid</td>
-            <td>10/20/2021</td>
-            <td><button class="check" onclick="ord(302,3002)">check</button></td>
-          </tr>
-          <tr id="3009" class="active-row">
-            <td>2</td>
-            <td>1534</td>
-            <td>123456789</td>
-            <td>CLCLCL</td>
-            <td>$100</td>
-            <td>Paid</td>
-            <td>10/20/2021</td>
-            <td><button class="check" onclick="ord(302,3002)">check</button></td>
-          </tr>
-          <tr id="3010" class="active-row">
-            <td>2</td>
-            <td>1534</td>
-            <td>123456789</td>
-            <td>CLCLCL</td>
-            <td>$100</td>
-            <td>Paid</td>
-            <td>10/20/2021</td>
-            <td><button class="check" onclick="ord(302,3002)">check</button></td>
-          </tr>
-          <tr id="3011" class="active-row">
-            <td>2</td>
-            <td>1534</td>
-            <td>123456789</td>
-            <td>CLCLCL</td>
-            <td>$100</td>
-            <td>Paid</td>
-            <td>10/20/2021</td>
-            <td><button class="check" onclick="ord(302,3002)">check</button></td>
-          </tr>
-          <tr id="3012" class="active-row">
-            <td>2</td>
-            <td>1534</td>
-            <td>123456789</td>
-            <td>CLCLCL</td>
-            <td>$100</td>
-            <td>Paid</td>
-            <td>10/20/2021</td>
-            <td><button class="check" onclick="ord(302,3002)">check</button></td>
-          </tr>
-          <tr id="3013" class="active-row">
-            <td>2</td>
-            <td>1534</td>
-            <td>123456789</td>
-            <td>CLCLCL</td>
-            <td>$100</td>
-            <td>Paid</td>
-            <td>10/20/2021</td>
-            <td><button class="check" onclick="ord(302,3002)">check</button></td>
-          </tr>
-          <tr id="3014" class="active-row">
-            <td>2</td>
-            <td>1534</td>
-            <td>123456789</td>
-            <td>CLCLCL</td>
-            <td>$100</td>
-            <td>Paid</td>
-            <td>10/20/2021</td>
-            <td><button class="check" onclick="ord(302,3002)">check</button></td>
-          </tr>
-          <tr id="3015" class="active-row">
-            <td>2</td>
-            <td>1534</td>
-            <td>123456789</td>
-            <td>CLCLCL</td>
-            <td>$100</td>
-            <td>Paid</td>
-            <td>10/20/2021</td>
-            <td><button class="check" onclick="ord(302,3002)">check</button></td>
-          </tr>
-          <tr id="3016" class="active-row">
-            <td>2</td>
-            <td>1534</td>
-            <td>123456789</td>
-            <td>CLCLCL</td>
-            <td>$100</td>
-            <td>Paid</td>
-            <td>10/20/2021</td>
-            <td><button class="check" onclick="ord(302,3002)">check</button></td>
-          </tr>
-          <tr id="3017" class="active-row">
-            <td>2</td>
-            <td>1534</td>
-            <td>123456789</td>
-            <td>CLCLCL</td>
-            <td>$100</td>
-            <td>Paid</td>
-            <td>10/20/2021</td>
-            <td><button class="check" onclick="ord(302,3002)">check</button></td>
-          </tr>
-          <tr id="3018" class="active-row">
-            <td>2</td>
-            <td>1534</td>
-            <td>123456789</td>
-            <td>CLCLCL</td>
-            <td>$100</td>
-            <td>Paid</td>
-            <td>10/20/2021</td>
-            <td><button class="check" onclick="ord(302,3002)">check</button></td>
-          </tr>
-          <tr id="3019" class="active-row">
-            <td>2</td>
-            <td>1534</td>
-            <td>123456789</td>
-            <td>CLCLCL</td>
-            <td>$100</td>
-            <td>Paid</td>
-            <td>10/20/2021</td>
-            <td><button class="check" onclick="ord(302,3002)">check</button></td>
-          </tr>
-          <tr id="3020" class="active-row">
-            <td>2</td>
-            <td>1534</td>
-            <td>123456789</td>
-            <td>CLCLCL</td>
-            <td>$100</td>
-            <td>Paid</td>
-            <td>10/20/2021</td>
-            <td><button class="check" onclick="ord(302,3002)">check</button></td>
-          </tr>
-          <tr id="3021" class="active-row">
-            <td>2</td>
-            <td>1534</td>
-            <td>123456789</td>
-            <td>CLCLCL</td>
-            <td>$100</td>
-            <td>Paid</td>
-            <td>10/20/2021</td>
-            <td><button class="check" onclick="ord(302,3002)">check</button></td>
-          </tr>
-          <tr id="3022" class="active-row">
-            <td>2</td>
-            <td>1534</td>
-            <td>123456789</td>
-            <td>CLCLCL</td>
-            <td>$100</td>
-            <td>Paid</td>
-            <td>10/20/2021</td>
-            <td><button class="check" onclick="ord(302,3002)">check</button></td>
-          </tr>
-          <tr id="3023" class="active-row">
-            <td>2</td>
-            <td>1534</td>
-            <td>123456789</td>
-            <td>CLCLCL</td>
-            <td>$100</td>
-            <td>Paid</td>
-            <td>10/20/2021</td>
-            <td><button class="check" onclick="ord(302,3002)">check</button></td>
-          </tr>
-          <tr id="3024" class="active-row">
-            <td>2</td>
-            <td>1534</td>
-            <td>123456789</td>
-            <td>CLCLCL</td>
-            <td>$100</td>
-            <td>Paid</td>
-            <td>10/20/2021</td>
-            <td><button class="check" onclick="ord(302,3002)">check</button></td>
-          </tr>
-          <tr id="3025" class="active-row">
-            <td>2</td>
-            <td>1534</td>
-            <td>123456789</td>
-            <td>CLCLCL</td>
-            <td>$100</td>
-            <td>Paid</td>
-            <td>10/20/2021</td>
-            <td><button class="check" onclick="ord(302,3002)">check</button></td>
-          </tr>
-
-
-        </tbody>
-      </table>
-      <div class="background_order" id="30000" onclick="or()" style="z-index: 9998;"></div>
-      <div id="301" class="del" style="position: absolute; display: none; top: 0%; left: 15%; z-index: 9998;">
-        <div class="card">
-          <div class="invoice p-5">
-            <h5>Order information</h5>
-            <span class="font-weight-bold d-block mt-4">Name: aaaa</span>
-            <span class="font-weight-bold d-block mt-4">Email/Phone: aaaa@gmail.com</span>
-            <span class="font-weight-bold d-block mt-4">Rating: * * * * *</span>
-            <span class="font-weight-bold d-block mt-4">Comment: </span>
-            <div class="payment border-top mt-3 mb-3 border-bottom table-responsive">
-              <table class="table table-borderless">
-                <tbody>
-                  <tr>
-                    <td>
-                      <div class="py-2"> <span class="d-block text-muted">Order Date</span> <span>12 Jan,2018</span>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="py-2"> <span class="d-block text-muted">Order No</span> <span>332345</span> </div>
-                    </td>
-                    <td>
-                      <div class="py-2"> <span class="d-block text-muted">Status</span> <span> Unpaid</span> </div>
-                    </td>
-                    <td>
-                      <div class="py-2"> <span class="d-block text-muted">Table</span> <span> 1 </span> </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="product border-bottom table-responsive">
-              <table class="table table-borderless">
-                <tbody>
-                  <tr>
-                    <td width="20%"> <img src="./Images/7.png" width="90"> </td>
-                    <td width="60%"> <span class="font-weight-bold">Food 1</span>
-                      <div class="product-qty"> <span class="d-block">Quantity:1</span> <span>Size: 2</span> </div>
-                    </td>
-                    <td width="20%">
-                      <div class="text-right"> <span class="font-weight-bold">$16</span> </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td width="20%"> <img src="./Images/7.png" width="90"> </td>
-                    <td width="60%"> <span class="font-weight-bold">Food 2</span>
-                      <div class="product-qty"> <span class="d-block">Quantity:1</span> <span>Size: 1</span> </div>
-                    </td>
-                    <td width="20%">
-                      <div class="text-right"> <span class="font-weight-bold">$15</span> </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="row d-flex justify-content-end">
-              <div class="col-md-5">
-                <table class="table table-borderless">
-                  <tbody class="totals">
-                    <tr class="border-top border-bottom">
-                      <td>
-                        <div class="text-left"> <span class="font-weight-bold">Total</span> </div>
-                      </td>
-                      <td>
-                        <div class="text-right"> <span class="font-weight-bold">$31</span> </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <div class="paynow" onclick="payment(3001)">
-              <a href="#payment" style="color: #fff">Pay Now</a>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <div id="302" style="display: none;position: fixed;top: 10%;left: 73%;">
-        <p>THIS IS DETAILS ORDER 2</p>
-      </div>
-    </div>
-  </div>
-  <div class="main-content" id="104">
-    <div class="container" style="display: none;" id="40000">
-      <div class="py-5 text-center">
-        <h2>Checkout form</h2>
-      </div>
-
-      <div class="row">
-        <div class="col-md-4 order-md-2 mb-4">
-          <h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span class="text-muted">Cart</span>
-            <span class="badge badge-secondary badge-pill">3</span>
-          </h4>
-          <ul class="list-group mb-3">
-            <li class="list-group-item d-flex justify-content-between lh-condensed">
-              <div>
-                <h6 class="my-0">Product name</h6>
-                <small class="text-muted">Brief description</small>
-              </div>
-              <span class="text-muted">$12</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-condensed">
-              <div>
-                <h6 class="my-0">Second product</h6>
-                <small class="text-muted">Brief description</small>
-              </div>
-              <span class="text-muted">$8</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-condensed">
-              <div>
-                <h6 class="my-0">Third item</h6>
-                <small class="text-muted">Brief description</small>
-              </div>
-              <span class="text-muted">$5</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between">
-              <span>Total (USD)</span>
-              <strong>$20</strong>
-            </li>
-          </ul>
-        </div>
-        <div class="col-md-8 order-md-1">
-          <h4 class="mb-3">Customer</h4>
-          <form class="needs-validation" novalidate="">
-            <div class="row">
-              <div class="col-md-6 mb-3">
-                <label for="firstName">First name</label>
-                <input type="text" class="form-control" id="firstName"
-                  placeholder="M làm cho cái này tự động điền và ko thể sửa" value="" required="">
-              </div>
-              <div class="col-md-6 mb-3">
-                <label for="lastName">Last name</label>
-                <input type="text" class="form-control" id="lastName"
-                  placeholder="M làm cho cái này tự động điền và ko thể sửa" value="" required="">
-              </div>
-            </div>
-
-            <div class="mb-3">
-              <label for="email">Email </label>
-              <input type="email" class="form-control" id="email"
-                placeholder="M làm cho cái này tự động điền và ko thể sửa">
-            </div>
-            <hr class="mb-4">
-            <hr class="mb-4">
-
-            <h4 class="mb-3">Payment</h4>
-
-            <div class="d-block my-3">
-              <div class="custom-control custom-radio">
-                <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked="" required=""
-                  onclick="creditpay()">
-                <label class="custom-control-label" for="credit">Credit card</label>
-              </div>
-              <div class="custom-control custom-radio">
-                <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required=""
-                  onclick="momopay()">
-                <label class="custom-control-label" for="debit">QR MOMO</label>
-              </div>
-              <div class="custom-control custom-radio">
-                <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required=""
-                  onclick="cash()">
-                <label class="custom-control-label" for="paypal">Cash</label>
-              </div>
-            </div>
-            <div id="creditcard">
-              <div class="row">
-                <div class="col-md-6 mb-3">
-                  <label for="cc-name">Name on card</label>
-                  <input type="text" class="form-control" id="cc-name" placeholder="" required="">
-                  <small class="text-muted">Full name as displayed on card</small>
-                  <div class="invalid-feedback">
-                    Name on card is required
-                  </div>
-                </div>
-                <div class="col-md-6 mb-3">
-                  <label for="cc-number">Credit card number</label>
-                  <input type="text" class="form-control" id="cc-number" placeholder="" required="">
-                  <div class="invalid-feedback">
-                    Credit card number is required
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-3 mb-3">
-                  <label for="cc-expiration">Expiration</label>
-                  <input type="text" class="form-control" id="cc-expiration" placeholder="" required="">
-                  <div class="invalid-feedback">
-                    Expiration date required
-                  </div>
-                </div>
-                <div class="col-md-3 mb-3">
-                  <label for="cc-cvv">CVV</label>
-                  <input type="text" class="form-control" id="cc-cvv" placeholder="" required="">
-                  <div class="invalid-feedback">
-                    Security code required
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="ethpayment" id="momo" style="display: none;">
-
-              <img src="./Images/QR MOMO.jpg">
-              <img src="./Images/momo.png">
-            </div>
-            <hr class="mb-4">
-
-            <button class="btn btn-primary btn-lg btn-block" type="submit" style="
-    background-color: rgb(0, 188, 126);
-    border-color: rgb(0, 188, 126);
-" onclick="success()">Continue to checkout</button>
-          </form>
-        </div>
-      </div>
-    </div>
-    <div class="container" id="succes" style="display: none; z-index: 9998;">
-      <div class="row">
-        <div class="col-md-6 mx-auto mt-5">
-          <div class="payment_ess">
-            <div class="payment_header_ess">
-              <div class="check_ess"><i class="fa fa-check" aria-hidden="true"></i></div>
-            </div>
-            <div class="content_ess">
-              <h1>Payment Success !</h1>
-              <p>Thank you for payment.
-                <br> We are always ready to serve you.
-              </p>
-              <a href="#Home" onclick="gohome()">Go to Home</a>
-              <a href="#Feedback" onclick="feedback()">Feedback</a>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="form-main" style="display: none;">
-
-      <div id="form-div">
-        <form class="form" id="form1">
-          <div class="fb-heading">How do you feel about our service?</div>
-          <div class="demo">
-
-            <span class="rating" data-evaluation="0">
-              <a href="#" data-value="1" class="material-icons icon">star</a><a href="#" data-value="2"
-                class="material-icons icon">star</a><a href="#" data-value="3" class="material-icons icon">star</a><a
-                href="#" data-value="4" class="material-icons icon">star</a><a href="#" data-value="5"
-                class="material-icons icon">star</a>
-            </span>
-
-
-          </div>
-          <p class="text">
-            <textarea name="text" class="validate[required,length[6,300]] feedback-input" id="comment"
-              placeholder="Comment"></textarea>
-          </p>
-
-
-          <div class="submit" onclick="successfeedback()">
-            <input type="submit" value="Submit" id="button-blue" />
-          </div>
-        </form>
-      </div>
-    </div>
-    <div class="container" id="successfeedbacks" style="display: none; z-index: 9998;">
-      <div class="row">
-        <div class="col-md-6 mx-auto mt-5">
-          <div class="payment_ess">
-            <div class="payment_header_ess">
-              <div class="check_ess"><i class="fa fa-check" aria-hidden="true"></i></div>
-            </div>
-            <div class="content_ess">
-              <h1>Feedback Success !</h1>
-              <p>Thanks for your feedback.</p>
-              <a href="#" onclick="gohome()">Go to Home</a>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="main-content" id="105">
-    <table class="content-table">
-      <thead>
-        <tr>
-          <th>STT</th>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Phone number/email</th>
-          <th>Total payment</th>
-          <th>Ranking</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr onclick="infcustomer()">
-          <td>1</td>
-          <td>1534</td>
-          <td>adad</td>
-          <td>02546565</td>
-          <td>1021544</td>
-          <td>Gold</td>
-          <td></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="main-content" id="106"></div>
-  <script>
-    let b = [1, 1, 1];
-    let prices = [12, 8, 9];
-    totl = 0;
-    for (let i = 0; i < 3; i++) {
-      totl = b[i] * prices[i] + totl;
-    }
-    function myFunction(a, c, i) {
-      b[i] = b[i] + a;
-      if (b[i] < 1) { b[i] = 1; }
-      else {
-        document.getElementById(c).innerHTML = b[i];
-        totl = totl + prices[i] * a;
-        document.getElementById(4).innerHTML = "$" + totl;
-      }
-    }
-    document.getElementById(4).innerHTML = "$" + totl;
-    document.getElementById(100).style.display = 'block';
-    function my(i) {
-      document.getElementById(301).style.display = 'none';
-      document.getElementById(30000).style.display = 'none';
-      for (el = 100; el < 107; el++) {
-        if (el != i) {
-          document.getElementById(el).style.display = 'none';
         }
-        else {
-          document.getElementById(el).style.display = 'block';
+        e.addEventListener("mouseover", $Osc.hover, false);
+        e.addEventListener("mouseout", $Osc.out, false);
+
+        c.append(d, e);
+        // var f = document.createElement("span");
+        // f.classList.add('itemGram');
+        var f = document.createElement("label");
+        f.for = 'size';
+        f.innerHTML = 'Size: ';
+        var f1 = document.createElement("select");
+        // f1.id = 'size';
+
+        var f2 = document.createElement("option");
+        f2.value = 1;
+        f2.innerHTML = 'Small';
+        var f3 = document.createElement("option");
+        f3.value = 2;
+        f3.innerHTML = 'Normal';
+        var f4 = document.createElement("option");
+        f4.value = 3;
+        f4.innerHTML = 'Big';
+        f1.appendChild(f2)
+        if (num_size == 2)
+            f1.appendChild(f3)
+        else if (num_size == 3)
+            f1.append(f3, f4)
+
+        var g = document.createElement("div");
+        g.classList.add('bottomSide');
+        i.append(c, f, f1, g)
+        var h = document.createElement("div");
+        h.classList.add('itemPrice');
+        h.innerHTML = '$' + price;
+        f1.addEventListener(
+            'change',
+            function () {
+                orders[idx].size = Number(f1.value);
+                h.innerHTML = '$' + orders[idx].num * price * orders[idx].size;
+            },
+            false
+        );
+        var k = document.createElement("div");
+        k.classList.add('controls');
+        g.append(h, k)
+        var l = document.createElement("span");
+        l.classList.add('count');
+        l.innerHTML = 1;
+        var m = document.createElement("span");
+        m.classList.add('minusIcon');
+        m.addEventListener("click", function () {
+            if (orders[idx].num > 1)
+                orders[idx].num -= 1;
+            l.innerHTML = orders[idx].num;
+            h.innerHTML = '$' + orders[idx].num * price * orders[idx].size;
+        });
+        var n = document.createElement("span");
+        n.classList.add('plusIcon');
+        n.addEventListener("click", function () {
+            orders[idx].num += 1;
+            l.innerHTML = orders[idx].num;
+            h.innerHTML = '$' + orders[idx].num * price * orders[idx].size;
+        });
+        m.innerHTML = '-';
+        n.innerHTML = '+';
+        k.append(m, l, n);
+        console.log(orders)
+    }
+    var csrftoken = getCookie('csrftoken');
+    function confirm_order(id) {
+        var url = '/product/order/' + id + '/confirm/';
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': csrftoken,
+            },
+            body: JSON.stringify(orders)
+        }).then(res => {
+            return res.json();
         }
-      }
+        ).then((data) => {
+            if (data == true) {
+                alert("Success order!!!")
+                window.location.href = "{% url 'product:place-list' %}";
+            }
+            else if (data == false) {
+                alert('You haven\'t taken place yet!!!')
+            }
+            else { alert(data + ' Out of material!!!') }
+        });
     }
-    document.getElementById(401).style.display = 'block';
-    function on(el) {
-      for (i = 401; i < 404; i++) {
-        if (i != el) {
-          document.getElementById(i).style.display = 'none';
-        }
-        else {
-          document.getElementById(i).style.display = 'block';
-        }
-      }
-    }
-
-    function ord(el, ee) {
-      for (i = 301; i < 303; i++) {
-        if (i == el) {
-          document.getElementById(30000).style.display = 'block';
-          document.getElementById(i).style.display = 'block';
-        }
-        else {
-          document.getElementById(i).style.display = 'none';
-        }
-      }
-    }
-
-    function or() {
-      document.getElementById(30000).style.display = 'none';
-      for (i = 301; i < 303; i++) {
-        document.getElementById(i).style.display = 'none';
-      }
-    }
-
-    function menucate(el) {
-      for (i = 1001; i < 1004; i++) {
-        if (i == el) {
-          document.getElementById(i).style.display = 'block';
-        }
-        else {
-          document.getElementById(i).style.display = 'none';
-        }
-      }
-    }
-
-    function payment(e) {
-      document.getElementById(103).style.display = 'none';
-      document.getElementById(104).style.display = 'block';
-      document.getElementById(40000).style.display = 'block';
-    }
-
-    function success() {
-      document.getElementById("succes").style.display = 'block';
-      document.getElementById(40000).style.display = 'none';
-    }
-
-    function feedback() {
-      document.getElementById("succes").style.display = 'none';
-      document.getElementById("form-main").style.display = 'block';
-    }
-
-    function gohome() {
-      document.getElementById("succes").style.display = 'none';
-      document.getElementById("successfeedbacks").style.display = 'none';
-      document.getElementById(100).style.display = 'block';
-    }
-
-    function menu() {
-      document.getElementById("100").style.display = 'none';
-      document.getElementById("101").style.display = 'block';
-    }
-
-    function successfeedback() {
-      document.getElementById("form-main").style.display = 'none';
-      document.getElementById("successfeedbacks").style.display = 'block';
-    }
-
-
-    function typelistr(q) {
-      if (q == 1) {
-        var add = "typelist";
-      }
-      else {
-        var add = "typelist2";
-      }
-      if (document.getElementById(add).value == 20001) {
-        document.getElementById("20001").style.display = 'block';
-        document.getElementById("20002").style.display = 'none';
-      }
-      else {
-        document.getElementById("20002").style.display = 'block';
-        document.getElementById("20001").style.display = 'none';
-      }
-
-    }
-
-
-    function infcustomer() {
-
-    }
-
-
-    function creditpay() {
-      document.getElementById("creditcard").style.display = 'block';
-      document.getElementById("momo").style.display = 'none';
-    }
-    function momopay() {
-      document.getElementById("creditcard").style.display = 'none';
-      document.getElementById("momo").style.display = 'block';
-    }
-    function cash() {
-      document.getElementById("creditcard").style.display = 'none';
-      document.getElementById("momo").style.display = 'none';
-    }
-  </script>
-
-  <!-- partial -->
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js'></script>
-  <script src="./script.js"></script>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js'></script>
-</body>
-
-</html>
+</script>
+{% endblock content %}

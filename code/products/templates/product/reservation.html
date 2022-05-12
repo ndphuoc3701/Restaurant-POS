@@ -6,6 +6,7 @@ Chỗ ngồi đặt trước
 <p>{{ item.id }}&emsp; {{ item.reserve.name }}&emsp; {{ item.reserve.phone }}<button
         onclick="reserve('{{item.reserve.id}}')">Đặt chỗ</button>
 </p>
+{% endfor %}
 <script>
     var csrftoken = getCookie('csrftoken');
     function reserve(id) {
@@ -29,6 +30,5 @@ Chỗ ngồi đặt trước
         });
 
     }</script>
-{% endfor %}
 <a href="../">Quay lại</a>
 {% endblock content %}

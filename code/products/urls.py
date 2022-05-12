@@ -2,7 +2,7 @@ from django.urls import path
 from .views import *
 app_name = 'product'
 urlpatterns = [
-    path('home/', home),
+    path('home/', home, name='home'),
     path('customer/', cus_list, name='cus-list'),
     path('customer/<int:id>/', print_cus_info, name='cus-info'),
     path('history/', order_history, name='order-history'),
@@ -16,4 +16,9 @@ urlpatterns = [
     path('pay/', pay),
     path('pay/fetch/', pay_fetch),
     path('pay/confirm/', pay_confirm),
+    path('pay/feedback/', feedback),
+    path('pay/feedback/confirm/', feedback_confirm),
+    path('login/', login),
+    path('login/fetch/', login_fetch),
+    path('logout/', logout),
 ]

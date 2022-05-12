@@ -11,26 +11,32 @@ from django.utils import timezone
 import pytz
 
 
-class Pos():
+class Pos:
+    orde = ''
+
+    @staticmethod
+    def login(username, password):
+        return StaffDB.check(username, password)
+
     @staticmethod
     def order(id_cus, id_place, note, list_food):
         for food in list_food:
-            if not Food.objects.get(id=food['id']).check_available(food['size'], food['num']):
+            if not FoodDB.check_available(food['id'], food['size'], food['num']):
                 return Food.objects.get(id=food['id']).name
-        Order.create_order(id_cus=id_cus, id_place=id_place,
-                           note=note)
-        order = Order.objects.get(id=Order.objects.count())
+        OrderDB.create_order(id_cus=id_cus, id_place=id_place,
+                             note=note)
+        order = Order.objects.all().last()
         for food in list_food:
-
             food_id = Food.objects.get(id=food['id'])
             Food_Order.objects.create(
                 id_food=food_id, id_order=order, size=food['size'], quantity=food['num'])
-            food_id.update_food(food['size'], food['num'])
+            FoodDB.update_food(food_id, food['size'], food['num'])
+        OrderDB.update_order(order, order.get_order_price())
         return True
 
     @staticmethod
     def place_manage():
-        return Place.objects.all()
+        return PlaceDB.show_place()
 
     @staticmethod
     def check_reserved():
@@ -38,41 +44,50 @@ class Pos():
 
     @staticmethod
     def take_place(id_place):
-        Place.objects.get(id=id_place).update_place(True)
-        pass
+        PlaceDB.update_place(id_place, True)
 
     @staticmethod
-    def cus_info():
-        return Customer.objects.all()
+    def cus_list():
+        return CustomerDB.get_cus_list()
+
+    @staticmethod
+    def cus_info(id):
+        return CustomerDB.get_cus_info(id)
 
     @staticmethod
     def order_history():
-        return Order.objects.all()
+        return OrderDB.get_order_history()
 
     @staticmethod
     def print_order(id_order):
-        return Order.objects.get(id=id_order)
+        return OrderDB.get_order_info(id_order, True)
+
+    @classmethod
+    def pay(cls, phone):
+        cus = Customer.objects.get(phone=phone)
+        cls.orde = Order.objects.filter(id_cus=cus)
+        cls.orde = cls.orde[cls.orde.count()-1]
+        return cls.orde.get_order_item(), cus
+
+    @classmethod
+    def confirm_pay(cls):
+        PlaceDB.update_place(cls.orde.id_place.id, False)
+        OrderDB.update_order(cls.orde, 0)
+        cls.orde.id_cus.update_cus(cls.orde.get_order_price())
+
+    @classmethod
+    def feedback(cls, eval, comt):
+        FeedbackDB.create_feedback(cls.orde, eval, comt)
+
+
+class CustomerDB:
+    @staticmethod
+    def get_cus_list():
+        return Customer.objects.all()
 
     @staticmethod
-    def pay(phone):
-        cus = Customer.objects.get(phone=phone)
-        order = Order.objects.filter(id_cus=cus)
-        order = order[order.count()-1]
-        return cus, order
-
-    def confirm_pay(phone):
-        cus, order = Pos.pay(phone)
-        order.id_place.update_place(False)
-        order.update_order(order.get_order_price())
-        cus.update_cus(order.get_order_price())
-
-    @staticmethod
-    def feedback(phone, eval, comt):
-        cus = Customer.objects.get(phone=phone)
-        order = Order.objects.filter(id_cus=cus)
-        order = order[order.count()-1]
-        Feedback.objects.create(
-            id_cus=cus, id_order=order, evaluate=evaluate, comment=comt)
+    def get_cus_info(id):
+        return Customer.objects.get(id=id)
 
 
 class Customer(models.Model):
@@ -100,20 +115,31 @@ class Customer(models.Model):
         super().save()
 
 
+class FeedbackDB:
+    @staticmethod
+    def create_feedback(order, eval, comt):
+        Feedback.objects.create(id_order=order, evaluate=eval, comment=comt)
+
+
 class Feedback(models.Model):
 
-    id_cus = models.ForeignKey(Customer, on_delete=models.CASCADE)
-
-    id_order = models.ForeignKey('Order', on_delete=models.CASCADE)
+    id_order = models.OneToOneField(
+        'Order', on_delete=models.CASCADE, unique=True)
 
     evaluate = models.IntegerField(blank=False, null=False)
 
     comment = models.CharField(
         db_column='Comment', max_length=20, blank=True, null=True)
 
+
+class FoodDB:
     @staticmethod
-    def create_feedback():
-        Feedback
+    def check_available(id_food, size, num):
+        return Food.objects.get(id=id_food).available(size, num)
+
+    @staticmethod
+    def update_food(food_id, size, quantity):
+        food_id.update(size, quantity)
 
 
 class Food(models.Model):
@@ -128,12 +154,12 @@ class Food(models.Model):
     price = models.IntegerField(db_column='Price', blank=False, null=False)
     image = models.ImageField(null=True, blank=True)
 
-    def check_available(self, size, quantity):
+    def available(self, size, quantity):
         if size*quantity > self.remain:
             return False
         return True
 
-    def update_food(self, size, quantity):
+    def update(self, size, quantity):
         self.remain = self.remain-size*quantity
         super().save()
 
@@ -156,6 +182,26 @@ class Food_Order(models.Model):
         return Food.objects.get(id=self.id_food.id).price*self.size*self.quantity
 
 
+class OrderDB:
+    @staticmethod
+    def create_order(id_cus, id_place, note):
+        cus = Customer.objects.get(id=id_cus)
+        place = Place.objects.get(id=id_place)
+        Order.objects.create(id_cus=cus, id_place=place, note=note)
+
+    @staticmethod
+    def get_order_history():
+        return Order.objects.all()
+
+    @staticmethod
+    def get_order_info(id_order, a: bool):
+        return Order.objects.get(id=id_order)
+
+    @staticmethod
+    def update_order(order, price):
+        order.update(price)
+
+
 class Order(models.Model):
 
     id_cus = models.ForeignKey(Customer, on_delete=models.CASCADE)
@@ -173,16 +219,12 @@ class Order(models.Model):
 
     totalprice = models.IntegerField(blank=True, default=0)
 
-    @staticmethod
-    def create_order(id_cus, id_place, note):
-        cus = Customer.objects.get(id=id_cus)
-        place = Place.objects.get(id=id_place)
-        Order.objects.create(id_cus=cus, id_place=place, note=note)
-
-    def update_order(self, price):
-        self.totalprice += price
-        self.status = 1
-        self.endtime = timezone.now()
+    def update(self, price):
+        if price != 0:
+            self.totalprice += price
+        else:
+            self.status = 1
+            self.endtime = timezone.now()
         super().save()
 
     def get_order_price(self):
@@ -196,37 +238,26 @@ class Order(models.Model):
         return Food_Order.objects.filter(id_order=self)
 
 
+class PlaceDB:
+    @staticmethod
+    def show_place():
+        return Place.objects.all()
+
+    @staticmethod
+    def update_place(id_place, a: bool):
+        Place.objects.get(id=id_place).update(a)
+
+
 class Place(models.Model):
 
     status = models.IntegerField(blank=True, default=0)
     reserve = models.OneToOneField(
         Customer, blank=True, null=True, on_delete=models.CASCADE)
 
-    def update_place(self, a: bool):
+    def update(self, a: bool):
         if not a:
             self.status = 0
             self.reserve = None
         else:
             self.status = 1
-        # super().save()
-
-
-class Staff(models.Model):
-
-    name = models.CharField(max_length=10, blank=True, null=True)
-
-    username = models.CharField(unique=True, max_length=10)
-
-    password = models.CharField(max_length=10, blank=False, null=False)
-
-    @staticmethod
-    def request_place():
-        return Pos.place_manage()
-
-    @staticmethod
-    def request_order(id_cus, id_place, note, list_food):
-        return Pos.order(id_cus, id_place, note, list_food)
-
-    @staticmethod
-    def request_pay(phone):
-        return Pos.pay(phone)
+        super().save()
